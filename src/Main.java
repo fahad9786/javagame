@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 /**
@@ -38,8 +41,8 @@ public class Main extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     
-
-
+    
+        
     // GAME VARIABLES END HERE    
 
     
@@ -94,7 +97,7 @@ public class Main extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void setup() {
         // Any of your pre setup before the loop starts should go here
-
+        
     }
 
     // The main game loop
