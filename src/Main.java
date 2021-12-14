@@ -20,8 +20,8 @@ import javax.swing.Timer;
 public class Main extends JComponent implements ActionListener {
 
     // Height and Width of our game
-    static final int WIDTH = 800;
-    static final int HEIGHT = 600;
+    static final int WIDTH = 1280;
+    static final int HEIGHT = 720;
 
     //Title of the window
     String title = "My Game";
