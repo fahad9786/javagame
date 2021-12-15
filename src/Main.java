@@ -40,7 +40,9 @@ public class Main extends JComponent implements ActionListener {
     Timer gameTimer;
 
     // YOUR GAME VARIABLES WOULD GO HERE
+    
     BufferedImage currentImage;
+    MainMenu m = new MainMenu();
     
         
     // GAME VARIABLES END HERE    
