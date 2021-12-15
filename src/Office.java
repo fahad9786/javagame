@@ -23,7 +23,7 @@ public class Office {
     }
     
     public int decreasePower(){
-        
+        return 0;
     }
     
     
