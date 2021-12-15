@@ -15,13 +15,35 @@ import javax.imageio.ImageIO;
  * @author ramcj7742
  */
 public class MainMenu {
-    private String images;
+    public String[] images;
+    private int numFrames;
     
-    MainMenu(){
+    public MainMenu(){
         try{
             Scanner input = new Scanner(new File("AnimationImages.txt"));
+            numFrames = input.nextInt();
+            
+            images = new String[numFrames];
+            input.nextLine(); //goes to next line
+            
+            for (int i = 0; i < images.length; i++) {
+                images[i] = input.nextLine();
+                System.out.println(images[i]);
+            }
+            
         }catch(Exception e){
             
         }
+    }
+    
+    public BufferedImage getImage(String name){
+        BufferedImage img = null;
+        try{
+            img = ImageIO.read(new File("MenuAnimation//" + name));
+            System.out.println(name);
+        }catch(Exception e){
+            
+        }
+        return img;
     }
 }

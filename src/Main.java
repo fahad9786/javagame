@@ -43,6 +43,12 @@ public class Main extends JComponent implements ActionListener {
     
     BufferedImage currentImage;
     MainMenu m = new MainMenu();
+    int menuFrame = 1;
+    String menuFrameToString;
+    
+    boolean menu;
+    boolean office;
+    boolean camera;
     
         
     // GAME VARIABLES END HERE    
@@ -92,6 +98,10 @@ public class Main extends JComponent implements ActionListener {
 
         // GAME DRAWING GOES HERE
         
+        //draws the current main image
+        g.drawImage(currentImage, -150, 0, null);
+        
+        //draws overlays
         
         // GAME DRAWING ENDS HERE
     }
@@ -106,7 +116,14 @@ public class Main extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void loop() {
+        menuFrameToString =  menuFrame + ".PNG";
+        if(menuFrame >= m.images.length){
+            menuFrame = 1;
+        }else{
+            menuFrame++;
+        }
         
+        currentImage = m.getImage(menuFrameToString);
     }
 
     // Used to implement any of the Mouse Actions
