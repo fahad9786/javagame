@@ -9,5 +9,17 @@
  * @author ramcj7742
  */
 public class MainMenu {
+    private int night; 
     
+    public boolean newGame(){
+        if(night == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    
+   
 }
