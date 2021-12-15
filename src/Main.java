@@ -40,7 +40,7 @@ public class Main extends JComponent implements ActionListener {
     Timer gameTimer;
 
     // YOUR GAME VARIABLES WOULD GO HERE
-    
+    BufferedImage currentImage;
     
         
     // GAME VARIABLES END HERE    
@@ -89,6 +89,7 @@ public class Main extends JComponent implements ActionListener {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
         // GAME DRAWING GOES HERE
+        
         
         // GAME DRAWING ENDS HERE
     }
