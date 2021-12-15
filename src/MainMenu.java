@@ -40,7 +40,6 @@ public class MainMenu {
         BufferedImage img = null;
         try{
             img = ImageIO.read(new File("MenuAnimation//" + name));
-            System.out.println(name);
         }catch(Exception e){
             
         }

@@ -41,8 +41,9 @@ public class Main extends JComponent implements ActionListener {
     Timer gameTimer;
 
     // YOUR GAME VARIABLES WOULD GO HERE
-    
+    Timer lol = new Timer(60,this);
     Font header = new Font("Arial", Font.BOLD, 100);
+    Font buttons = new Font("Arial", Font.PLAIN, 50);
     
     BufferedImage currentImage;
     MainMenu m = new MainMenu();
@@ -112,6 +113,9 @@ public class Main extends JComponent implements ActionListener {
             g.drawString("Nights", 50, 200);
             g.drawString("At", 50, 300);
             g.drawString("Fahad's", 50, 400);
+            g.setFont(buttons);
+            g.drawString("New Game", 100, 500);
+            g.drawString("Continue", 100, 600);
         }
         
         //draws overlays
@@ -136,7 +140,6 @@ public class Main extends JComponent implements ActionListener {
             }else{
                 menuFrame++;
             }
-        
             currentImage = m.getImage(menuFrameToString);
         }
         
