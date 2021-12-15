@@ -42,7 +42,7 @@ public class Main extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     
-    Font header = new Font("arial", Font.PLAIN, 100);
+    Font header = new Font("Arial", Font.BOLD, 100);
     
     BufferedImage currentImage;
     MainMenu m = new MainMenu();
