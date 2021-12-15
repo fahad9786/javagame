@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -41,14 +42,16 @@ public class Main extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     
+    Font header = new Font("arial", Font.PLAIN, 100);
+    
     BufferedImage currentImage;
     MainMenu m = new MainMenu();
     int menuFrame = 1;
     String menuFrameToString;
     
-    boolean menu;
-    boolean office;
-    boolean camera;
+    boolean menu = true;
+    boolean office = false;
+    boolean camera = false;
     
         
     // GAME VARIABLES END HERE    
@@ -99,7 +102,17 @@ public class Main extends JComponent implements ActionListener {
         // GAME DRAWING GOES HERE
         
         //draws the current main image
-        g.drawImage(currentImage, -150, 0, null);
+        g.drawImage(currentImage, 0, 0, null);
+        
+        //drawing for spectific cases (menu, camera etc.)
+        if(menu){
+            g.setFont(header);
+            g.setColor(Color.WHITE);
+            g.drawString("Five", 50, 100);
+            g.drawString("Nights", 50, 200);
+            g.drawString("At", 50, 300);
+            g.drawString("Fahad's", 50, 400);
+        }
         
         //draws overlays
         
@@ -116,14 +129,17 @@ public class Main extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void loop() {
-        menuFrameToString =  menuFrame + ".PNG";
-        if(menuFrame >= m.images.length){
-            menuFrame = 1;
-        }else{
-            menuFrame++;
+        if(menu){
+            menuFrameToString =  menuFrame + ".jpg";
+            if(menuFrame >= m.images.length){
+                menuFrame = 1;
+            }else{
+                menuFrame++;
+            }
+        
+            currentImage = m.getImage(menuFrameToString);
         }
         
-        currentImage = m.getImage(menuFrameToString);
     }
 
     // Used to implement any of the Mouse Actions
