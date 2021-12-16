@@ -194,6 +194,8 @@ public class Main extends JComponent implements ActionListener {
                 }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
                     System.out.println("hello");
                 }
+            }else if(office){
+                 
             }
         }
 

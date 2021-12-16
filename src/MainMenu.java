@@ -46,9 +46,7 @@ public class MainMenu {
             
 
             for (int i = 0; i < scary.length; i++) {
-                System.out.println(scary[i]);
                 scaryPics[i] = ImageIO.read(new File("MenuAnimation//" + scary[i]));
-                System.out.println(scaryPics[i]);
             }
             
             for (int i = 0; i < images.length; i++) {
