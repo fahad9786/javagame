@@ -13,22 +13,26 @@ import java.awt.image.BufferedImage;
  */
 public class Office {
     // create instance variavles 
-    public static double power = 100;
-    public boolean door1 = false;
-    public boolean door2 = false;
-    public boolean light1 = false;
-    public boolean light2 = false; 
-    public boolean cam = false;
+    private static double power = 100;
+    private boolean door1 = false;
+    private boolean door2 = false;
+    private boolean light1 = false;
+    private boolean light2 = false; 
+    private boolean cam = false;
     
+    
+    public Office(){
+        
+    }
     public BufferedImage getImage(String offices){
-        return 
+        return null;
     }
     
      
     
     // getter method
     public  double getPower(){
-     return power;
+        return power;
     }
  
     

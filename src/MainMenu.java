@@ -16,7 +16,12 @@ import javax.imageio.ImageIO;
  */
 public class MainMenu {
     public String[] images;
+    private BufferedImage[] pics;
     private int numFrames;
+    
+    private int numScary;
+    public String[] scary;
+    private BufferedImage[] scaryPics;
     
     public MainMenu(){
         try{
@@ -24,24 +29,42 @@ public class MainMenu {
             numFrames = input.nextInt();
             
             images = new String[numFrames];
+            pics = new BufferedImage[numFrames];
             input.nextLine(); //goes to next line
             
             for (int i = 0; i < images.length; i++) {
                 images[i] = input.nextLine();
             }
             
-        }catch(Exception e){
+            numScary = input.nextInt();
+            scary = new String[numScary];
+            scaryPics = new BufferedImage[numScary];
+            input.nextLine();
+            for (int i = 0; i < scary.length; i++) {
+                scary[i] = input.nextLine();
+            }
             
+
+            for (int i = 0; i < scary.length; i++) {
+                System.out.println(scary[i]);
+                scaryPics[i] = ImageIO.read(new File("MenuAnimation//" + scary[i]));
+                System.out.println(scaryPics[i]);
+            }
+            
+            for (int i = 0; i < images.length; i++) {
+                pics[i] = ImageIO.read(new File("MenuAnimation//" + images[i]));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
     
-    public BufferedImage getImage(String name){
-        BufferedImage img = null;
-        try{
-            img = ImageIO.read(new File("MenuAnimation//" + name));
-        }catch(Exception e){
-            
-        }
-        return img;
+    public BufferedImage getImage(int i){
+        return pics[i];
+    }
+    
+    public BufferedImage getScary(int i){
+        return scaryPics[i];
     }
 }

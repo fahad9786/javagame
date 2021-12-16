@@ -43,7 +43,9 @@ public class Main extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     
-    final long startTime = System.currentTimeMillis(); //time the program was started
+    public final long startTime = System.currentTimeMillis(); //time the program was started
+    long loadTime; //time the pre night screen was started
+    long compareTime; //this time will have its corresponding start time subtracted to calculate the time elapsed in seconds
 
     
     Font header = new Font("Arial", Font.BOLD, 100);
@@ -52,11 +54,13 @@ public class Main extends JComponent implements ActionListener {
     BufferedImage currentImage;
     MainMenu menu = new MainMenu();
     int menuFrame = 1;
+    double scaryPic;
     
     boolean onMenu = true;
     boolean office = false;
     boolean camera = false;
     boolean loadNight = false;
+    boolean isDead = false;
     
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
     Rectangle continueBut = new Rectangle(100, 560, 200, 50);
@@ -123,6 +127,11 @@ public class Main extends JComponent implements ActionListener {
             g.setFont(buttons);
             g.drawString("New Game", 100, 500);
             g.drawString("Continue", 100, 600);
+            if(scaryPic > 0.6 && scaryPic < 0.8){
+                g.drawImage(menu.getScary(0), 700, 200, null);
+            }else if(scaryPic > 0.8){
+                g.drawImage(menu.getScary(1), 800, 200, null);
+            }
             
             //will be deleted, just for testing button
             g.drawRect(newGameBut.x, newGameBut.y,newGameBut.width, newGameBut.height);
@@ -156,10 +165,15 @@ public class Main extends JComponent implements ActionListener {
             }else{
                 menuFrame++;
             }
-            
-            currentImage = menu.getImage(menu.images[menuFrame]);
-        }else if(office){
-            
+            scaryPic = Math.random();
+            currentImage = menu.getImage(menuFrame);
+        }else if(loadNight){
+            //loads night for 5 seconds
+            compareTime = System.currentTimeMillis();
+            if((compareTime - loadTime) / 1000 > 5){
+                loadNight = false;
+                office = true;
+            }
         }
         
     }
@@ -175,6 +189,7 @@ public class Main extends JComponent implements ActionListener {
                 if(e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height){
                     System.out.println("hi");
                     onMenu = false;
+                    loadTime = System.currentTimeMillis();
                     loadNight = true;
                 }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
                     System.out.println("hello");
