@@ -158,6 +158,8 @@ public class Main extends JComponent implements ActionListener {
             }
             
             currentImage = menu.getImage(menu.images[menuFrame]);
+        }else if(office){
+            
         }
         
     }

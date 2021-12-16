@@ -1,3 +1,6 @@
+
+import java.awt.image.BufferedImage;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +20,9 @@ public class Office {
     public boolean light2 = false; 
     public boolean cam = false;
     
-    
+    public BufferedImage getImage(String offices){
+        return 
+    }
     
      
     
