@@ -168,6 +168,7 @@ public class Main extends JComponent implements ActionListener {
             scaryPic = Math.random();
             currentImage = menu.getImage(menuFrame);
         }else if(loadNight){
+            //loads night for 5 seconds
             compareTime = System.currentTimeMillis();
             if((compareTime - loadTime) / 1000 > 5){
                 loadNight = false;
