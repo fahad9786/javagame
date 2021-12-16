@@ -43,7 +43,9 @@ public class Main extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     
-    final long startTime = System.currentTimeMillis(); //time the program was started
+    public final long startTime = System.currentTimeMillis(); //time the program was started
+    long loadTime; //time the pre night screen was started
+    long compareTime; //this time will have its corresponding start time subtracted to calculate the time elapsed in seconds
 
     
     Font header = new Font("Arial", Font.BOLD, 100);
@@ -158,6 +160,12 @@ public class Main extends JComponent implements ActionListener {
             }
             
             currentImage = menu.getImage(menuFrame);
+        }else if(loadNight){
+            compareTime = System.currentTimeMillis();
+            if((compareTime - loadTime) / 1000 > 5){
+                loadNight = false;
+                office = true;
+            }
         }
         
     }
@@ -173,6 +181,7 @@ public class Main extends JComponent implements ActionListener {
                 if(e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height){
                     System.out.println("hi");
                     onMenu = false;
+                    loadTime = System.currentTimeMillis();
                     loadNight = true;
                 }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
                     System.out.println("hello");
