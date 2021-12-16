@@ -10,7 +10,7 @@
  */
 public class Office {
     // create instance variavles 
-    private final int power = 100;
+    private int power = 100;
     public boolean door1 = false;
     public boolean door2 = false;
     public boolean light1 = false;
@@ -19,7 +19,7 @@ public class Office {
     
         
     public int getPower(){
-     return power;
+        return power;
     }
     
     public int decreasePower(){
