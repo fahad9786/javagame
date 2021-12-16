@@ -42,16 +42,18 @@ public class Main extends JComponent implements ActionListener {
     Timer gameTimer;
 
     // YOUR GAME VARIABLES WOULD GO HERE
-    Timer lol = new Timer(60,this);
+    
+    final long startTime = System.currentTimeMillis(); //time the program was started
+
+    
     Font header = new Font("Arial", Font.BOLD, 100);
     Font buttons = new Font("Arial", Font.PLAIN, 50);
     
     BufferedImage currentImage;
-    MainMenu m = new MainMenu();
+    MainMenu menu = new MainMenu();
     int menuFrame = 1;
-    String menuFrameToString;
     
-    boolean menu = true;
+    boolean onMenu = true;
     boolean office = false;
     boolean camera = false;
     
@@ -110,7 +112,7 @@ public class Main extends JComponent implements ActionListener {
         g.drawImage(currentImage, 0, 0, null);
         
         //drawing for spectific cases (menu, camera etc.)
-        if(menu){
+        if(onMenu){
             g.setFont(header);
             g.setColor(Color.WHITE);
             g.drawString("Five", 50, 100);
@@ -135,21 +137,20 @@ public class Main extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void setup() {
         // Any of your pre setup before the loop starts should go here
-        
+        System.out.println(startTime);
     }
 
     // The main game loop
     // In here is where all the logic for my game will go
     public void loop() {
-        if(menu){
-            menuFrameToString =  m.images[menuFrame];
-            if(menuFrame >= m.images.length-1){
+        if(onMenu){
+            if(menuFrame >= menu.images.length-1){
                 menuFrame = 0;
             }else{
                 menuFrame++;
             }
             
-            currentImage = m.getImage(menuFrameToString);
+            currentImage = menu.getImage(menu.images[menuFrame]);
         }
         
     }
@@ -161,9 +162,10 @@ public class Main extends JComponent implements ActionListener {
         @Override
         public void mousePressed(MouseEvent e) {
             //mouse events during the menu screen
-            if(menu){
+            if(onMenu){
                 if(e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height){
                     System.out.println("hi");
+                    onMenu = false;
                 }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
                     System.out.println("hello");
                 }
