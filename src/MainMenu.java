@@ -1,6 +1,7 @@
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 
@@ -23,6 +24,7 @@ public class MainMenu {
     public String[] scary;
     private BufferedImage[] scaryPics;
     
+    Scanner nightNum;
     private int night;
     
     public MainMenu(){
@@ -61,15 +63,21 @@ public class MainMenu {
     }
     
     public int load(int b){
-        if(b == 1){
-            try{
-                Scanner nightNum = new Scanner(new File("Config.txt"));
+        try{
+            if(b == 1){
+                nightNum = new Scanner(new File("Config.txt"));
                 return nightNum.nextInt();
-            }catch(Exception e){
-                e.printStackTrace();
+            }else{
+                PrintWriter output = new PrintWriter(new File("Config.txt"));
+                output.println(1);
+                output.close();
+                return 1;
             }
+        }catch(Exception e){
+            
         }
         return 1;
+        
     }
     
     
