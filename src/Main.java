@@ -54,11 +54,13 @@ public class Main extends JComponent implements ActionListener {
     BufferedImage currentImage;
     MainMenu menu = new MainMenu();
     int menuFrame = 1;
+    double scaryPic;
     
     boolean onMenu = true;
     boolean office = false;
     boolean camera = false;
     boolean loadNight = false;
+    boolean isDead = false;
     
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
     Rectangle continueBut = new Rectangle(100, 560, 200, 50);
@@ -125,6 +127,9 @@ public class Main extends JComponent implements ActionListener {
             g.setFont(buttons);
             g.drawString("New Game", 100, 500);
             g.drawString("Continue", 100, 600);
+            if(scaryPic > 0.7){
+                g.drawImage(menu.getScary(0), 700, 200, null);
+            }
             
             //will be deleted, just for testing button
             g.drawRect(newGameBut.x, newGameBut.y,newGameBut.width, newGameBut.height);
@@ -158,7 +163,7 @@ public class Main extends JComponent implements ActionListener {
             }else{
                 menuFrame++;
             }
-            
+            scaryPic = Math.random();
             currentImage = menu.getImage(menuFrame);
         }else if(loadNight){
             compareTime = System.currentTimeMillis();
