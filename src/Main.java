@@ -127,8 +127,10 @@ public class Main extends JComponent implements ActionListener {
             g.setFont(buttons);
             g.drawString("New Game", 100, 500);
             g.drawString("Continue", 100, 600);
-            if(scaryPic > 0.7){
+            if(scaryPic > 0.6 && scaryPic < 0.8){
                 g.drawImage(menu.getScary(0), 700, 200, null);
+            }else if(scaryPic > 0.8){
+                g.drawImage(menu.getScary(1), 800, 200, null);
             }
             
             //will be deleted, just for testing button

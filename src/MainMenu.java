@@ -34,15 +34,14 @@ public class MainMenu {
             
             for (int i = 0; i < images.length; i++) {
                 images[i] = input.nextLine();
-                System.out.println(images[i]);
             }
             
             numScary = input.nextInt();
             scary = new String[numScary];
+            scaryPics = new BufferedImage[numScary];
             input.nextLine();
             for (int i = 0; i < scary.length; i++) {
                 scary[i] = input.nextLine();
-                System.out.println(scary[i]);
             }
             
 
