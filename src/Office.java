@@ -23,7 +23,7 @@ public class Office {
     
     // getter method
     public  double getPower(){
-     return power;
+        return power;
     }
  
     
