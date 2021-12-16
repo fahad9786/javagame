@@ -56,6 +56,7 @@ public class Main extends JComponent implements ActionListener {
     boolean onMenu = true;
     boolean office = false;
     boolean camera = false;
+    boolean loadNight = false;
     
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
     Rectangle continueBut = new Rectangle(100, 560, 200, 50);
@@ -126,6 +127,12 @@ public class Main extends JComponent implements ActionListener {
             //will be deleted, just for testing button
             g.drawRect(newGameBut.x, newGameBut.y,newGameBut.width, newGameBut.height);
             g.drawRect(continueBut.x, continueBut.y, continueBut.width, continueBut.height);
+        }else if(loadNight){
+            g.setFont(buttons);
+            g.setColor(Color.black);
+            g.fillRect(0, 0, WIDTH, HEIGHT);
+            g.setColor(Color.white);
+            g.drawString("Night", WIDTH/2 - 100, HEIGHT/2 + 25);
         }
         
         //draws overlays
@@ -166,6 +173,7 @@ public class Main extends JComponent implements ActionListener {
                 if(e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height){
                     System.out.println("hi");
                     onMenu = false;
+                    loadNight = true;
                 }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
                     System.out.println("hello");
                 }
