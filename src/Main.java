@@ -157,7 +157,7 @@ public class Main extends JComponent implements ActionListener {
                 menuFrame++;
             }
             
-            currentImage = menu.getImage(menu.images[menuFrame]);
+            currentImage = menu.getImage(menuFrame);
         }
         
     }
