@@ -5,6 +5,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -42,16 +43,23 @@ public class Main extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     
-    Font header = new Font("arial", Font.PLAIN, 100);
+    final long startTime = System.currentTimeMillis(); //time the program was started
+
+    
+    Font header = new Font("Arial", Font.BOLD, 100);
+    Font buttons = new Font("Arial", Font.PLAIN, 50);
     
     BufferedImage currentImage;
-    MainMenu m = new MainMenu();
+    MainMenu menu = new MainMenu();
     int menuFrame = 1;
-    String menuFrameToString;
     
-    boolean menu = true;
+    boolean onMenu = true;
     boolean office = false;
     boolean camera = false;
+    boolean loadNight = false;
+    
+    Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
+    Rectangle continueBut = new Rectangle(100, 560, 200, 50);
     
         
     // GAME VARIABLES END HERE    
@@ -105,13 +113,26 @@ public class Main extends JComponent implements ActionListener {
         g.drawImage(currentImage, 0, 0, null);
         
         //drawing for spectific cases (menu, camera etc.)
-        if(menu){
+        if(onMenu){
             g.setFont(header);
             g.setColor(Color.WHITE);
             g.drawString("Five", 50, 100);
             g.drawString("Nights", 50, 200);
             g.drawString("At", 50, 300);
             g.drawString("Fahad's", 50, 400);
+            g.setFont(buttons);
+            g.drawString("New Game", 100, 500);
+            g.drawString("Continue", 100, 600);
+            
+            //will be deleted, just for testing button
+            g.drawRect(newGameBut.x, newGameBut.y,newGameBut.width, newGameBut.height);
+            g.drawRect(continueBut.x, continueBut.y, continueBut.width, continueBut.height);
+        }else if(loadNight){
+            g.setFont(buttons);
+            g.setColor(Color.black);
+            g.fillRect(0, 0, WIDTH, HEIGHT);
+            g.setColor(Color.white);
+            g.drawString("Night", WIDTH/2 - 100, HEIGHT/2 + 25);
         }
         
         //draws overlays
@@ -123,21 +144,20 @@ public class Main extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void setup() {
         // Any of your pre setup before the loop starts should go here
-        
+        System.out.println(startTime);
     }
 
     // The main game loop
     // In here is where all the logic for my game will go
     public void loop() {
-        if(menu){
-            menuFrameToString =  menuFrame + ".jpg";
-            if(menuFrame >= m.images.length){
-                menuFrame = 1;
+        if(onMenu){
+            if(menuFrame >= menu.images.length-1){
+                menuFrame = 0;
             }else{
                 menuFrame++;
             }
-        
-            currentImage = m.getImage(menuFrameToString);
+            
+            currentImage = menu.getImage(menu.images[menuFrame]);
         }
         
     }
@@ -148,7 +168,16 @@ public class Main extends JComponent implements ActionListener {
         // if a mouse button has been pressed down
         @Override
         public void mousePressed(MouseEvent e) {
-
+            //mouse events during the menu screen
+            if(onMenu){
+                if(e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height){
+                    System.out.println("hi");
+                    onMenu = false;
+                    loadNight = true;
+                }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
+                    System.out.println("hello");
+                }
+            }
         }
 
         // if a mouse button has been released

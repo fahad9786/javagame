@@ -28,7 +28,6 @@ public class MainMenu {
             
             for (int i = 0; i < images.length; i++) {
                 images[i] = input.nextLine();
-                System.out.println(images[i]);
             }
             
         }catch(Exception e){
@@ -40,7 +39,6 @@ public class MainMenu {
         BufferedImage img = null;
         try{
             img = ImageIO.read(new File("MenuAnimation//" + name));
-            System.out.println(name);
         }catch(Exception e){
             
         }
