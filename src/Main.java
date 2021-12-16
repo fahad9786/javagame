@@ -60,6 +60,7 @@ public class Main extends JComponent implements ActionListener {
     double scaryPic;
     double picNum; // chooses the image to display on menu screen
     boolean drawFace = false;
+    int night; // current night the player is on
     
     boolean onMenu = true;
     boolean office = false;
@@ -148,7 +149,8 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.black);
             g.fillRect(0, 0, WIDTH, HEIGHT);
             g.setColor(Color.white);
-            g.drawString("Night", WIDTH/2 - 100, HEIGHT/2 + 25);
+            g.drawString("Night " + night, WIDTH/2 - 100, HEIGHT/2 + 25);
+            g.drawString((compareTime - loadTime) / 60 + "%", 1180, 700);
         }
         
         //draws overlays
@@ -207,8 +209,13 @@ public class Main extends JComponent implements ActionListener {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
                     loadNight = true;
+                    night = menu.load(0);
                 }else if(e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height){
                     System.out.println("hello");
+                    onMenu = false;
+                    loadTime = System.currentTimeMillis();
+                    loadNight = true;
+                    night = menu.load(1);
                 }
             }
         }

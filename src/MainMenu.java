@@ -23,6 +23,8 @@ public class MainMenu {
     public String[] scary;
     private BufferedImage[] scaryPics;
     
+    private int night;
+    
     public MainMenu(){
         try{
             Scanner input = new Scanner(new File("AnimationImages.txt"));
@@ -57,6 +59,20 @@ public class MainMenu {
             e.printStackTrace();
         }
     }
+    
+    public int load(int b){
+        if(b == 1){
+            try{
+                Scanner nightNum = new Scanner(new File("Config.txt"));
+                return nightNum.nextInt();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return 1;
+    }
+    
+    
     
     public BufferedImage getImage(int i){
         return pics[i];
