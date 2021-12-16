@@ -151,9 +151,12 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.white);
             g.drawString("Night " + night, WIDTH/2 - 100, HEIGHT/2 + 25);
             g.drawString((compareTime - loadTime) / 60 + "%", 1180, 700);
+        }else if(office){
+            g.setFont(header);
+            g.setColor(Color.white);
+            g.drawString("hi", 100, 100);
         }
         
-        //draws overlays
         
         // GAME DRAWING ENDS HERE
     }
