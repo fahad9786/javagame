@@ -225,7 +225,7 @@ public class Main extends JComponent implements ActionListener {
         }else if(loadNight){
             //loads night for 5 seconds
             compareTime = System.currentTimeMillis();
-            if((compareTime - loadTime) / 1000 > 0){
+            if((compareTime - loadTime) / 1000 > 5){
                 loadNight = false;
                 curCam = p.Cam1A;
                 office = true;
