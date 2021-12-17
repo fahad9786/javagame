@@ -20,9 +20,40 @@ public class Office {
     private boolean light2 = false; 
     private boolean cam = false;
     
+    // setter classes  
+    public boolean setDoor1(){
+        if(door1 == false){
+         door1 = true;
+        }  
+     return door1;
+    }
     
-    public Office(){
-        
+    public boolean setDoor2(){
+        if(door2 == false){
+            door2 = true;
+        }
+        return door2;
+    }
+    
+    public boolean light1(){
+        if(light1 == false){
+            light1 = true;
+        }
+        return light1;
+    }
+    
+    public boolean light2(){
+        if(light2 == false){
+            light2 = true;
+        }
+        return light2;
+    }
+    
+    public boolean cam(){
+        if(cam == false){
+            cam = true;
+        }
+        return cam;
     }
     
     
@@ -36,7 +67,7 @@ public class Office {
     public  double getPower(){
         return power;
     }
- 
+    
     
     public void decreasePower(){
         // subtract 5 from the power when nothings being used every ...time
