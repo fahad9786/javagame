@@ -9,5 +9,5 @@
  * @author ramcj7742
  */
 public class Fahad {
-    
+    private int roomNum;
 }

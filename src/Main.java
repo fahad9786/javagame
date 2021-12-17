@@ -177,11 +177,15 @@ public class Main extends JComponent implements ActionListener {
                 g.drawImage(p.butLeft, 20, 400, null);
                 if(o.getDoor1()){
                     g.drawImage(p.leftDoor, 100, 50, null);
+                }else if(o.getLight1()){
+                    g.drawImage(p.leftHallLit, 100, 50, null);
                 }
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
                 if(o.getDoor2()){
                     g.drawImage(p.rightDoor, 980, 50, null);
+                }else if(o.getLight2()){
+                    g.drawImage(p.rightHallLit, 980, 50, null);
                 }
             }
         } else if (camera) {
