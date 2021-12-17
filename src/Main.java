@@ -67,6 +67,7 @@ public class Main extends JComponent implements ActionListener {
     boolean loadNight = false;
     boolean isDead = false;
     boolean lookingLeft = true;
+    
 
     //main menu buttons
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
@@ -167,6 +168,7 @@ public class Main extends JComponent implements ActionListener {
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
                 g.drawImage(p.butLeft, 20, 400, null);
+                
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
             }
