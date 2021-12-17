@@ -91,6 +91,8 @@ public class Main extends JComponent implements ActionListener {
     //door buttons
     Rectangle leftDoorBut = new Rectangle(35, 426, 42, 100);
     Rectangle rightDoorBut = new Rectangle(1203, 426, 42, 100);
+    Rectangle leftHallLight = new Rectangle(35, 547, 42, 100);
+    Rectangle rightHallLight = new Rectangle(1203, 547, 42, 100);
 
     Player p = new Player();
     Office o = new Office();
@@ -228,7 +230,7 @@ public class Main extends JComponent implements ActionListener {
         } else if (loadNight) {
             //loads night for 5 seconds
             compareTime = System.currentTimeMillis();
-            if ((compareTime - loadTime) / 1000 > -1) {
+            if ((compareTime - loadTime) / 1000 > 5) {
                 loadNight = false;
                 curCam = p.Cam1A;
                 currentImage = p.left;
@@ -272,10 +274,14 @@ public class Main extends JComponent implements ActionListener {
                 }else if(lookingLeft){
                     if(e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height){
                         o.setDoor1();
+                    }else if(e.getX() > leftHallLight.x && e.getX() < leftHallLight.x + leftHallLight.width && e.getY() > leftHallLight.y && e.getY() < leftHallLight.y + leftHallLight.height){
+                        o.setLight1();
                     }
                 }else if(!lookingLeft){
                     if(e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height){
                         o.setDoor2();
+                    }else if(e.getX() > rightHallLight.x && e.getX() < rightHallLight.x + rightHallLight.width && e.getY() > rightHallLight.y && e.getY() < rightHallLight.y + rightHallLight.height){
+                        o.setLight2();
                     }
                 }
             } else if (camera) {
