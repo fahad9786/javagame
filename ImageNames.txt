@@ -1,6 +1,6 @@
-Cam_Map.jpg
+Cam_Map.PNG
 Cam1A.jpg
-Cam1b.jpg
+Cam1B.jpg
 Cam1C.jpg
 Cam2A.jpg
 Cam2B.jpg
@@ -9,4 +9,6 @@ Cam4A.jpg
 Cam4B.jpg
 Cam5.jpg
 Cam7.jpg
+officeLeft.jpg
+officeRight.jpg
 
