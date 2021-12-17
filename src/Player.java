@@ -51,7 +51,7 @@ public class Player {
             butLeft = ImageIO.read(new File("images//leftButton.PNG"));
             butRight = ImageIO.read(new File("images//rightButton.PNG"));
             leftDoor = ImageIO.read(new File("images//leftDoor.PNG"));
-            rightDoor = ImageIO.read(new File("images//rightButton.PNG"));
+            rightDoor = ImageIO.read(new File("images//rightDoor.PNG"));
         }catch(Exception e){
             e.printStackTrace();
         }

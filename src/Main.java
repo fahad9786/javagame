@@ -86,6 +86,10 @@ public class Main extends JComponent implements ActionListener {
     Rectangle cam7 = new Rectangle(1210, 550, 38, 27);
     BufferedImage curCam; // curent camera
     boolean camUI = false; // if camera needs extra UI elements (cam 6)
+    
+    //door buttons
+    Rectangle leftDoor = new Rectangle(35, 426, 42, 100);
+    Rectangle rightDoor = new Rectangle(1203, 426, 42, 100);
 
     Player p = new Player();
 
@@ -167,8 +171,12 @@ public class Main extends JComponent implements ActionListener {
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
                 g.drawImage(p.butLeft, 20, 400, null);
+                g.setColor(Color.white);
+                g.fillRect(35, 426, 42, 100);
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
+                g.setColor(Color.white);
+                g.fillRect(1203, 426, 42, 100);
             }
         } else if (camera) {
             g.drawImage(p.map, 1000, 500, null);
@@ -216,7 +224,7 @@ public class Main extends JComponent implements ActionListener {
         } else if (loadNight) {
             //loads night for 5 seconds
             compareTime = System.currentTimeMillis();
-            if ((compareTime - loadTime) / 1000 > 5) {
+            if ((compareTime - loadTime) / 1000 > -1) {
                 loadNight = false;
                 curCam = p.Cam1A;
                 currentImage = p.left;
