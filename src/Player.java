@@ -30,6 +30,8 @@ public class Player {
     public BufferedImage right;
     public BufferedImage butLeft;
     public BufferedImage butRight;
+    public BufferedImage leftDoor;
+    public BufferedImage rightDoor;
     
     public Player(){
         try{
@@ -48,6 +50,8 @@ public class Player {
             right = ImageIO.read(new File("images//officeRight.jpg"));
             butLeft = ImageIO.read(new File("images//leftButton.PNG"));
             butRight = ImageIO.read(new File("images//rightButton.PNG"));
+            leftDoor = ImageIO.read(new File("images//leftDoor.PNG"));
+            rightDoor = ImageIO.read(new File("images//rightButton.PNG"));
         }catch(Exception e){
             e.printStackTrace();
         }
