@@ -67,6 +67,7 @@ public class Main extends JComponent implements ActionListener {
     boolean loadNight = false;
     boolean isDead = false;
     boolean lookingLeft = true;
+    
 
     //main menu buttons
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
@@ -88,10 +89,11 @@ public class Main extends JComponent implements ActionListener {
     boolean camUI = false; // if camera needs extra UI elements (cam 6)
     
     //door buttons
-    Rectangle leftDoor = new Rectangle(35, 426, 42, 100);
-    Rectangle rightDoor = new Rectangle(1203, 426, 42, 100);
+    Rectangle leftDoorBut = new Rectangle(35, 426, 42, 100);
+    Rectangle rightDoorBut = new Rectangle(1203, 426, 42, 100);
 
     Player p = new Player();
+    Office o = new Office();
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -171,12 +173,14 @@ public class Main extends JComponent implements ActionListener {
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
                 g.drawImage(p.butLeft, 20, 400, null);
-                g.setColor(Color.white);
-                g.fillRect(35, 426, 42, 100);
+                if(o.getDoor1()){
+                    g.drawImage(p.leftDoor, 100, 50, null);
+                }
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
-                g.setColor(Color.white);
-                g.fillRect(1203, 426, 42, 100);
+                if(o.getDoor2()){
+                    g.drawImage(p.rightDoor, 980, 50, null);
+                }
             }
         } else if (camera) {
             g.drawImage(p.map, 1000, 500, null);
@@ -265,6 +269,14 @@ public class Main extends JComponent implements ActionListener {
                 if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = true;
                     office = false;
+                }else if(lookingLeft){
+                    if(e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height){
+                        o.setDoor1();
+                    }
+                }else if(!lookingLeft){
+                    if(e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height){
+                        o.setDoor2();
+                    }
                 }
             } else if (camera) {
                 if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
