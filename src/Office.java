@@ -24,6 +24,8 @@ public class Office {
     public Office(){
         
     }
+    
+    
     public BufferedImage getImage(String offices){
         return null;
     }
