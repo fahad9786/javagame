@@ -10,4 +10,12 @@
  */
 public class Fahad {
     private int roomNum;
+    
+    public Fahad(){
+        roomNum = 0;
+    }
+    
+    public int getRoom(){
+        return this.roomNum;
+    }
 }
