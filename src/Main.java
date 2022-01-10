@@ -60,6 +60,7 @@ public class Main extends JComponent implements ActionListener {
     double picNum; // chooses the image to display on menu screen
     boolean drawFace = false;
     int night; // current night the player is on
+    int time;
 
     boolean onMenu = true;
     boolean office = false;
@@ -96,6 +97,8 @@ public class Main extends JComponent implements ActionListener {
 
     Player p = new Player();
     Office o = new Office();
+    Fahad f = new Fahad();
+    TimeController t = new TimeController();
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -171,6 +174,10 @@ public class Main extends JComponent implements ActionListener {
             g.drawString("Night " + night, WIDTH / 2 - 100, HEIGHT / 2 + 25);
             g.drawString((compareTime - loadTime) / 60 + "%", 1180, 700);
         } else if (office) {
+            g.setColor(Color.white);
+            g.setFont(buttons);
+            g.drawString(Math.round(o.getPower()) + "%", 1, 50);
+            
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
@@ -189,6 +196,9 @@ public class Main extends JComponent implements ActionListener {
                 }
             }
         } else if (camera) {
+            g.setColor(Color.white);
+            g.setFont(buttons);
+            g.drawString(Math.round(o.getPower()) + "%", 1, 50);
             g.drawImage(p.map, 1000, 500, null);
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
@@ -212,6 +222,7 @@ public class Main extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void loop() {
+        t.getTime();
         if (onMenu) {
             //cycles through the glitching effect images
             if (menuFrame >= menu.images.length - 1) {
@@ -246,8 +257,10 @@ public class Main extends JComponent implements ActionListener {
             } else if (!lookingLeft) {
                 currentImage = p.right;
             }
+            o.decreasePower(System.currentTimeMillis());
         } else if (camera) {
             currentImage = curCam;
+            o.decreasePower(System.currentTimeMillis());
         }
 
     }
@@ -263,11 +276,13 @@ public class Main extends JComponent implements ActionListener {
                 if (e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height) {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
+                    t.nightStart();
                     loadNight = true;
                     night = menu.load(0);
                 } else if (e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height) {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
+                    t.nightStart();
                     loadNight = true;
                     night = menu.load(1);
                 }
