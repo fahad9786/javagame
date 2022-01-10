@@ -177,7 +177,7 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.white);
             g.setFont(buttons);
             g.drawString(Math.round(o.getPower()) + "%", 1, 50);
-            
+            g.drawString(t.getTime() + "AM", 1150, 50);
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
@@ -199,6 +199,7 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.white);
             g.setFont(buttons);
             g.drawString(Math.round(o.getPower()) + "%", 1, 50);
+            g.drawString(t.getTime() + "AM", 1150, 50);
             g.drawImage(p.map, 1000, 500, null);
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
@@ -222,7 +223,6 @@ public class Main extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void loop() {
-        t.getTime();
         if (onMenu) {
             //cycles through the glitching effect images
             if (menuFrame >= menu.images.length - 1) {

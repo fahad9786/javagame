@@ -9,17 +9,23 @@
  * @author pione
  */
 public class TimeController {
-    private long startTime;
+    private long hourTime;
     private int time = 12;
     
     public void nightStart(){
-        startTime = System.currentTimeMillis() - 5000;
+        hourTime = System.currentTimeMillis() + 5000;
     }
     
-    public void getTime(){
-        if((System.currentTimeMillis() - startTime / 1000) % 45 == 0){
-            System.out.println("HI");
+    public int getTime(){
+        System.out.println(((System.currentTimeMillis() - hourTime) / 1000) % 46);
+        if(((System.currentTimeMillis() - hourTime) / 1000) % 46 == 0){
+            if(this.time == 12){
+                this.time = 1;
+            }else{
+                this.time++;
+            }
+            hourTime = System.currentTimeMillis() - 1000;
         }
-        return;
+        return this.time;
     }
 }
