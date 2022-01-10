@@ -10,9 +10,15 @@
  */
 public class Fahad {
     private int roomNum;
+    private int difficulty;
+    private long startTime;
     
     public Fahad(){
         roomNum = 0;
+    }
+    
+    public void startTime(long time){
+        this.startTime = time;
     }
     
     public int getRoom(){
