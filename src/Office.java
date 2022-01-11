@@ -61,8 +61,8 @@ public class Office {
     public boolean setCam() {
         if (cam == false) {
             cam = true;
-        } else if (cam == false) {
-            cam = true;
+        } else if (cam == true) {
+            cam = false;
         }
         return cam;
     }

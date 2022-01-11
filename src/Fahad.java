@@ -17,12 +17,16 @@ import javax.imageio.ImageIO;
 public class Fahad {
     private int roomNum;
     private int difficulty;
-    private int chance;
+    private double chance;
+    private int moveTime = 100;
+    Office o;
+    
     private long startTime;
     public BufferedImage fad1;
     
-    public Fahad(){
+    public Fahad(Office o){
         roomNum = 0;
+        this.o = o;
         try{
             fad1 = ImageIO.read(new File("images//fahad_1_30.jpg"));
         }catch(Exception e){
@@ -30,8 +34,9 @@ public class Fahad {
         }
     }
     
-    public void startTime(long time){
-        this.startTime = time;
+    public void startNight(){
+        this.startTime = System.currentTimeMillis() + 5000;
+        setDifficulty();
     }
     
     public void setDifficulty(){
@@ -45,17 +50,26 @@ public class Fahad {
             }else if(diff == 3){
                 this.difficulty = 2;
             }else if(diff == 4){
-                this.difficulty = 3;
-            }else if(diff == 5){
                 this.difficulty = 4;
+            }else if(diff == 5){
+                this.difficulty = 6;
             }
+            System.out.println(difficulty);
+            chance = difficulty * 0.05;
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
     public void moveOpprotunity(){
-        
+        if((System.currentTimeMillis() - startTime)/100 > moveTime && !o.getCam()){
+            System.out.println("opprotunity");
+            if(Math.random() < chance){
+                System.out.println("move");
+                roomNum++;
+            }
+            startTime = System.currentTimeMillis() - 1000;
+        }
     }
     
     public int getRoom(){

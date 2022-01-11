@@ -100,7 +100,7 @@ public class Main extends JComponent implements ActionListener {
 
     Player p = new Player();
     Office o = new Office();
-    Fahad f = new Fahad();
+    Fahad f = new Fahad(o);
     TimeController t = new TimeController();
 
     // GAME VARIABLES END HERE    
@@ -275,9 +275,11 @@ public class Main extends JComponent implements ActionListener {
                 currentImage = p.right;
             }
             o.decreasePower(System.currentTimeMillis());
+            f.moveOpprotunity();
         } else if (camera) {
             currentImage = curCam;
             o.decreasePower(System.currentTimeMillis());
+            f.moveOpprotunity();
         }
 
     }
@@ -294,18 +296,21 @@ public class Main extends JComponent implements ActionListener {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
+                    f.startNight();
                     loadNight = true;
                     night = menu.load(0);
                 } else if (e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height) {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
+                    f.startNight();
                     loadNight = true;
                     night = menu.load(1);
                 }
             } else if (office) {
                 if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = true;
+                    o.setCam();
                     office = false;
                 }else if(lookingLeft){
                     if(e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height){
@@ -323,6 +328,7 @@ public class Main extends JComponent implements ActionListener {
             } else if (camera) {
                 if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = false;
+                    o.setCam();
                     office = true;
                     //Ubsurd amount of else if statements for each of the cameras
                 } else if (e.getX() > cam1A.x && e.getX() < cam1A.x + cam1A.width && e.getY() > cam1A.y && e.getY() < cam1A.y + cam1A.height) {
