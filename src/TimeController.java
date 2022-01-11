@@ -17,7 +17,7 @@ public class TimeController {
     }
     
     public int getTime(){
-        System.out.println(((System.currentTimeMillis() - hourTime) / 1000) % 46);
+        //determines if 45 seconds have passed and changes to the next hour
         if(((System.currentTimeMillis() - hourTime) / 1000) % 46 == 0){
             if(this.time == 12){
                 this.time = 1;

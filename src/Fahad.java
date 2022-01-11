@@ -1,6 +1,8 @@
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,10 +17,17 @@ import java.util.Scanner;
 public class Fahad {
     private int roomNum;
     private int difficulty;
+    private int chance;
     private long startTime;
+    public BufferedImage fad1;
     
     public Fahad(){
         roomNum = 0;
+        try{
+            fad1 = ImageIO.read(new File("images//fahad_1_30.jpg"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public void startTime(long time){

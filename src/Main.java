@@ -52,6 +52,8 @@ public class Main extends JComponent implements ActionListener {
     Font noVid = new Font("Helivetica", Font.BOLD, 85);
 
     BufferedImage currentImage;
+    BufferedImage fahad;
+    
     MainMenu menu = new MainMenu();
     BufferedImage smile = menu.getScary(0);
     BufferedImage baw = menu.getScary(1);
@@ -68,6 +70,7 @@ public class Main extends JComponent implements ActionListener {
     boolean loadNight = false;
     boolean isDead = false;
     boolean lookingLeft = true;
+    boolean lightsOut = false;
     
 
     //main menu buttons
@@ -158,6 +161,7 @@ public class Main extends JComponent implements ActionListener {
             g.setFont(buttons);
             g.drawString("New Game", 100, 500);
             g.drawString("Continue", 100, 600);
+            g.drawString("N" + menu.load(1), 325, 600);
             if (drawFace) {
                 if (picNum > 0.5) {
                     g.drawImage(smile, 750, 200, null);
@@ -198,9 +202,6 @@ public class Main extends JComponent implements ActionListener {
         } else if (camera) {
             g.setColor(Color.white);
             g.setFont(buttons);
-            g.drawString(Math.round(o.getPower()) + "%", 1, 50);
-            g.drawString(t.getTime() + "AM", 1150, 50);
-            g.drawImage(p.map, 1000, 500, null);
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
             g.setColor(Color.white);
@@ -208,6 +209,22 @@ public class Main extends JComponent implements ActionListener {
                 g.setFont(noVid);
                 g.drawString("[VIDEO FEED UNAVAILABLE]", 45, 200);
             }
+            //draws fahad in the correct room
+            if(currentImage == p.Cam1A && f.getRoom() == 0){
+                g.drawImage(f.fad1, 500, 300, null);
+            }else if(curCam == p.Cam1B && f.getRoom() == 1){
+                g.drawImage(f.fad1, 500, 300, null);
+            }else if(curCam == p.Cam7 && f.getRoom() == 2){
+                g.drawImage(f.fad1, 500, 300, null);
+            }else if(curCam == p.Cam4A && f.getRoom() == 4){
+                g.drawImage(f.fad1, 500, 300, null);
+            }else if(curCam == p.Cam4B && f.getRoom() == 5){
+                g.drawImage(f.fad1, 500, 300, null);
+            }
+            g.drawImage(p.map, 1000, 500, null);
+            g.drawString(Math.round(o.getPower()) + "%", 1, 50);
+            g.drawString(t.getTime() + "AM", 1150, 50);
+            
         }
 
         // GAME DRAWING ENDS HERE
