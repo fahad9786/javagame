@@ -101,6 +101,7 @@ public class Main extends JComponent implements ActionListener {
     Player p = new Player();
     Office o = new Office();
     Fahad f = new Fahad(o);
+    Jaden j = new Jaden(o);
     TimeController t = new TimeController();
 
     // GAME VARIABLES END HERE    
