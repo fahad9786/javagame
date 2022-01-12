@@ -9,7 +9,7 @@
  * @author pione
  */
 public class Jaden extends Fahad{
-    public Jaden(Office o){
-        super(o);
+    public Jaden(Office o, Player p, MainMenu m){
+        super(o, p, m);
     }
 }

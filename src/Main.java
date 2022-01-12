@@ -69,8 +69,11 @@ public class Main extends JComponent implements ActionListener {
     boolean camera = false;
     boolean loadNight = false;
     boolean isDead = false;
+    boolean winScreen = false;
     boolean lookingLeft = true;
     boolean lightsOut = false;
+    boolean FahadInRoom = false;
+    boolean JadenInRoom = false;
     
 
     //main menu buttons
@@ -100,8 +103,8 @@ public class Main extends JComponent implements ActionListener {
 
     Player p = new Player();
     Office o = new Office();
-    Fahad f = new Fahad(o);
-    Jaden j = new Jaden(o);
+    Fahad f = new Fahad(o, p, menu);
+    Jaden j = new Jaden(o, p, menu);
     TimeController t = new TimeController();
 
     // GAME VARIABLES END HERE    
@@ -206,17 +209,13 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
             g.setColor(Color.white);
-            if (camUI) {
-                g.setFont(noVid);
-                g.drawString("[VIDEO FEED UNAVAILABLE]", 45, 200);
-            }
             //draws fahad in the correct room
             if(currentImage == p.Cam1A && f.getRoom() == 0){
                 g.drawImage(f.fad1, 500, 300, null);
             }else if(curCam == p.Cam1B && f.getRoom() == 1){
-                g.drawImage(f.fad1, 500, 300, null);
+                g.drawImage(f.fad1, 600, 10, null);
             }else if(curCam == p.Cam7 && f.getRoom() == 2){
-                g.drawImage(f.fad1, 500, 300, null);
+                g.drawImage(f.fad1, 450, 300, null);
             }else if(curCam == p.Cam4A && f.getRoom() == 4){
                 g.drawImage(f.fad1, 500, 300, null);
             }else if(curCam == p.Cam4B && f.getRoom() == 5){
@@ -225,6 +224,10 @@ public class Main extends JComponent implements ActionListener {
             g.drawImage(p.map, 1000, 500, null);
             g.drawString(Math.round(o.getPower()) + "%", 1, 50);
             g.drawString(t.getTime() + "AM", 1150, 50);
+            if (camUI) {
+                g.setFont(noVid);
+                g.drawString("[VIDEO FEED UNAVAILABLE]", 45, 200);
+            }
             
         }
 
@@ -276,11 +279,11 @@ public class Main extends JComponent implements ActionListener {
                 currentImage = p.right;
             }
             o.decreasePower(System.currentTimeMillis());
-            f.moveOpprotunity();
+            f.moveOpprotunity(curCam);
         } else if (camera) {
             currentImage = curCam;
             o.decreasePower(System.currentTimeMillis());
-            f.moveOpprotunity();
+            f.moveOpprotunity(curCam);
         }
 
     }
