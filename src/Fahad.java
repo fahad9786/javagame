@@ -90,6 +90,9 @@ public class Fahad {
                 roomNum++;
             }
             startTime = System.currentTimeMillis() - 1000;
+        }else if((System.currentTimeMillis() - startTime)/100 > moveTime){
+            System.out.println("blocked");
+            startTime = System.currentTimeMillis() - 1000;
         }
     }
     
