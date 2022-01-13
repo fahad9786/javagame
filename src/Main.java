@@ -110,6 +110,7 @@ public class Main extends JComponent implements ActionListener {
     Fahad f = new Fahad(o, p, menu);
     Jaden j = new Jaden(o, p, menu);
     TimeController t = new TimeController();
+    AudioController a = new AudioController();
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -263,6 +264,7 @@ public class Main extends JComponent implements ActionListener {
     // In here is where all the logic for my game will go
     public void loop() {
         if (onMenu) {
+            a.menu();
             //cycles through the glitching effect images
             if (menuFrame >= menu.images.length - 1) {
                 menuFrame = 0;
@@ -289,6 +291,7 @@ public class Main extends JComponent implements ActionListener {
                 curCam = p.Cam1A;
                 currentImage = p.left;
                 office = true;
+                a.nightStart();
             }
         } else if (office) {
             FahadInRoom = f.inRoom();
@@ -303,6 +306,7 @@ public class Main extends JComponent implements ActionListener {
                 office = false;
                 winScreen = true;
                 compareTime = System.currentTimeMillis() - 1000;
+                a.nightEnd();
                 o.reset();
             }else if(o.getPower() <= 0){
                 noPower = true;
@@ -337,12 +341,16 @@ public class Main extends JComponent implements ActionListener {
         }else if(loseScreen){
             if(((System.currentTimeMillis() - compareTime)/1000) % 10 == 0){
                 loseScreen = false;
+                FahadInRoom = false;
+                JadenInRoom = false;
                 onMenu = true;
             }
         }
         
         if(office && FahadInRoom && Math.random() < f.getChance()){
             currentImage = f.jumpScare();
+            a.nightEnd();
+            a.jumpScare();
             office = false;
             isDead = true;
             compareTime = System.currentTimeMillis() - 1000;
@@ -362,6 +370,9 @@ public class Main extends JComponent implements ActionListener {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
+                    o.reset();
+                    a.noMenu();
+                    f.reset();
                     f.startNight();
                     loadNight = true;
                     night = menu.load(0);
@@ -369,6 +380,9 @@ public class Main extends JComponent implements ActionListener {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
+                    o.reset();
+                    a.noMenu();
+                    f.reset();
                     f.startNight();
                     loadNight = true;
                     night = menu.load(1);
@@ -376,6 +390,7 @@ public class Main extends JComponent implements ActionListener {
             } else if (office) {
                 if (!noPower && e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = true;
+                    a.monitor();
                     o.setCam();
                     office = false;
                 }else if(lookingLeft){
@@ -394,6 +409,7 @@ public class Main extends JComponent implements ActionListener {
             } else if (camera) {
                 if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = false;
+                    a.monitor();
                     o.setCam();
                     office = true;
                     //Ubsurd amount of else if statements for each of the cameras
