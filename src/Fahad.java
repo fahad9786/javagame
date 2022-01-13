@@ -20,6 +20,7 @@ public class Fahad {
     private double chance;
     private int moveTime = 100;
     private int camNum;
+    private boolean inRoom = false;
     Office o;
     Player p;
     MainMenu m;
@@ -57,7 +58,7 @@ public class Fahad {
             }else if(diff == 4){
                 this.difficulty = 4;
             }else if(diff == 5){
-                this.difficulty = 6;
+                this.difficulty = 20;
             }
             System.out.println(difficulty);
             chance = difficulty * 0.05;
@@ -85,9 +86,14 @@ public class Fahad {
         if((System.currentTimeMillis() - startTime)/100 > moveTime && !o.getCam() | camNum != roomNum){
             System.out.println(camNum + ", " + roomNum);
             System.out.println("opprotunity");
-            if(Math.random() < chance){
+            if(roomNum < 6 && Math.random() < chance){
                 System.out.println("move");
                 roomNum++;
+            }else if(roomNum == 6 && Math.random() < chance && o.getDoor2()){
+                roomNum = 1;
+            }else if(roomNum == 6 && Math.random() < chance && !o.getDoor2()){
+                roomNum = 7;
+                inRoom = true;
             }
             startTime = System.currentTimeMillis() - 1000;
         }else if((System.currentTimeMillis() - startTime)/100 > moveTime){
@@ -96,7 +102,30 @@ public class Fahad {
         }
     }
     
+    public BufferedImage jumpScare(){
+        return fad1;
+    }
+    
+    public void setRoom(int room){
+        this.roomNum = room;
+    }
+    
+    public boolean inRoom(){
+        return inRoom;
+    }
+    
     public int getRoom(){
         return this.roomNum;
+    }
+    
+    //chance can be used in other classes
+    public double getChance(){
+        return this.chance;
+    }
+    
+    public void reset(){
+        roomNum = 0;
+        inRoom = false;
+        camNum = 0;
     }
 }

@@ -71,6 +71,7 @@ public class Main extends JComponent implements ActionListener {
     boolean loadNight = false;
     boolean isDead = false;
     boolean winScreen = false;
+    boolean loseScreen = false;
     boolean lookingLeft = true;
     boolean lightsOut = false;
     boolean FahadInRoom = false;
@@ -239,6 +240,12 @@ public class Main extends JComponent implements ActionListener {
             g.drawString("6AM", WIDTH/2 - 75, HEIGHT/2 - 25);
             g.setFont(buttons);
             g.drawString("Congratulations!", WIDTH/2 - 175, HEIGHT/2 + 75);
+        }else if(loseScreen){
+            g.setColor(Color.black);
+            g.fillRect(0, 0, 1280, 720);
+            g.setColor(Color.white);
+            g.setFont(noVid);
+            g.drawString("[GAME_OVER]", 20, 100);
         }
 
         // GAME DRAWING ENDS HERE
@@ -283,6 +290,7 @@ public class Main extends JComponent implements ActionListener {
                 office = true;
             }
         } else if (office) {
+            FahadInRoom = f.inRoom();
             if (lookingLeft) {
                 currentImage = p.left;
             } else if (!lookingLeft) {
@@ -315,11 +323,28 @@ public class Main extends JComponent implements ActionListener {
                 o.allOff();
             }
         }else if (winScreen){
-            if(((System.currentTimeMillis() - compareTime)/1000) % 6 == 0){
+            if(((System.currentTimeMillis() - compareTime)/1000) % winScreenTime + 1 == 0){
                 winScreen = false;
                 onMenu = true;
                 menu.nextNight();
             }
+        }else if(isDead){
+            if(((System.currentTimeMillis() - compareTime)/1000) % 2 == 0){
+                loseScreen = true;
+                isDead = false;
+            }
+        }else if(loseScreen){
+            if(((System.currentTimeMillis() - compareTime)/1000) % 10 == 0){
+                loseScreen = false;
+                onMenu = true;
+            }
+        }
+        
+        if(office && FahadInRoom && Math.random() < f.getChance()){
+            currentImage = f.jumpScare();
+            office = false;
+            isDead = true;
+            compareTime = System.currentTimeMillis() - 1000;
         }
 
     }

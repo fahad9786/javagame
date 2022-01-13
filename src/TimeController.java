@@ -10,7 +10,7 @@
  */
 public class TimeController {
     private long hourTime;
-    private int time = 12;
+    private int time;
     
     public void nightStart(){
         hourTime = System.currentTimeMillis() - 5000;
@@ -19,7 +19,7 @@ public class TimeController {
     
     public int getTime(){
         //determines if 45 seconds have passed and changes to the next hour
-        if(((System.currentTimeMillis() - hourTime) / 1000) % 2 == 0){
+        if(((System.currentTimeMillis() - hourTime) / 1000) % 46 == 0){
             if(this.time == 12){
                 this.time = 1;
             }else{
