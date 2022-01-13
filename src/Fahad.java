@@ -58,7 +58,7 @@ public class Fahad {
             }else if(diff == 4){
                 this.difficulty = 4;
             }else if(diff == 5){
-                this.difficulty = 20;
+                this.difficulty = 6;
             }
             System.out.println(difficulty);
             chance = difficulty * 0.05;

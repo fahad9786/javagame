@@ -200,6 +200,9 @@ public class Main extends JComponent implements ActionListener {
                 }else if(o.getLight1()){
                     g.drawImage(p.leftHallLit, 100, 50, null);
                 }
+                if(j.getRoom() == 6 && o.getLight1()){
+                    g.drawImage(j.jad1, 200, 100, null);
+                }
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
                 if(o.getDoor2()){
@@ -209,13 +212,8 @@ public class Main extends JComponent implements ActionListener {
                 }
             }
         } else if (camera) {
-            g.setColor(Color.white);
-            g.setFont(buttons);
-            g.setColor(Color.gray);
-            g.drawRect(300, 600, 600, 100);
-            g.setColor(Color.white);
-            //draws fahad in the correct room
-            if(currentImage == p.Cam1A && f.getRoom() == 0){
+            //draws Fahad in the correct room
+            if(curCam == p.Cam1A && f.getRoom() == 0){
                 g.drawImage(f.fad1, 500, 300, null);
             }else if(curCam == p.Cam1B && f.getRoom() == 1){
                 g.drawImage(f.fad1, 600, 10, null);
@@ -226,6 +224,27 @@ public class Main extends JComponent implements ActionListener {
             }else if(curCam == p.Cam4B && f.getRoom() == 5){
                 g.drawImage(f.fad1, 500, 300, null);
             }
+            
+            //draws Jaden in the correct room
+            if(curCam == p.Cam1A && j.getRoom() == 0){
+                g.drawImage(j.jad1, 250, 350, null);
+            }else if(curCam == p.Cam1B && j.getRoom() == 1){
+                g.drawImage(j.jad1, 300, 400, null);
+            }else if(curCam == p.Cam5 && j.getRoom() == 2){
+                g.drawImage(j.jad1, 300, 400, null);
+            }else if(curCam == p.Cam2A && j.getRoom() == 3){
+                g.drawImage(j.jad1, 300, 400, null);
+            }else if(curCam == p.Cam3 && j.getRoom() == 4){
+                g.drawImage(j.jad1, 300, 400, null);
+            }else if(curCam == p.Cam2B && j.getRoom() == 5){
+                g.drawImage(j.jad1, 300, 400, null);
+            }
+            
+            g.setColor(Color.white);
+            g.setFont(buttons);
+            g.setColor(Color.gray);
+            g.drawRect(300, 600, 600, 100);
+            g.setColor(Color.white);
             g.drawImage(p.map, 1000, 500, null);
             g.drawString(Math.round(o.getPower()) + "%", 1, 50);
             g.drawString(t.getTime() + "AM", 1150, 50);
@@ -302,6 +321,7 @@ public class Main extends JComponent implements ActionListener {
             }
             o.decreasePower(System.currentTimeMillis());
             f.moveOpprotunity(curCam);
+            j.moveOpprotunity();
             if(t.getTime() == 6){
                 office = false;
                 winScreen = true;
@@ -316,6 +336,7 @@ public class Main extends JComponent implements ActionListener {
             currentImage = curCam;
             o.decreasePower(System.currentTimeMillis());
             f.moveOpprotunity(curCam);
+            j.moveOpprotunity();
             if(t.getTime() == 6){
                 camera = false;
                 winScreen = true;
@@ -374,6 +395,7 @@ public class Main extends JComponent implements ActionListener {
                     a.noMenu();
                     f.reset();
                     f.startNight();
+                    j.startNight();
                     loadNight = true;
                     night = menu.load(0);
                 } else if (e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height) {
@@ -384,6 +406,7 @@ public class Main extends JComponent implements ActionListener {
                     a.noMenu();
                     f.reset();
                     f.startNight();
+                    j.startNight();
                     loadNight = true;
                     night = menu.load(1);
                 }

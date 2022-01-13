@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  * @author pione
  */
 public class Jaden extends Fahad{
-    private BufferedImage jad1;
+    public BufferedImage jad1;
     private int roomNum;
     private int difficulty;
     private double chance;
@@ -27,6 +27,7 @@ public class Jaden extends Fahad{
     
     public Jaden(Office o, Player p, MainMenu m){
         super(o, p, m);
+        roomNum = 0;
         try{
             jad1 = ImageIO.read(new File("images//jad1.jpg"));
         }catch(Exception e){
@@ -34,11 +35,13 @@ public class Jaden extends Fahad{
         }
     }
     
+    @Override
     public void startNight(){
         this.startTime = System.currentTimeMillis() + 5000;
         setDifficulty();
     }
     
+    @Override
     public void setDifficulty(){
         try{
             Scanner scan = new Scanner(new File("Config.txt"));
@@ -60,4 +63,18 @@ public class Jaden extends Fahad{
             e.printStackTrace();
         }
     }
+    
+    public void moveOpprotunity(){
+        if((System.currentTimeMillis() - startTime)/100 > moveTime && roomNum < 6 && Math.random() < chance){
+            System.out.println("jaden");
+            roomNum++;
+            startTime = System.currentTimeMillis() - 1000;
+        }
+    }
+
+    @Override
+    public int getRoom() {
+        return roomNum;
+    }
+    
 }
