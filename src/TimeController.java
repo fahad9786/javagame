@@ -13,7 +13,8 @@ public class TimeController {
     private int time = 12;
     
     public void nightStart(){
-        hourTime = System.currentTimeMillis() + 5000;
+        hourTime = System.currentTimeMillis() - 5000;
+        time = 12;
     }
     
     public int getTime(){

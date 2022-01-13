@@ -63,6 +63,7 @@ public class Main extends JComponent implements ActionListener {
     boolean drawFace = false;
     int night; // current night the player is on
     int time;
+    int winScreenTime = 5; //time spent on win screen
 
     boolean onMenu = true;
     boolean office = false;
@@ -74,6 +75,7 @@ public class Main extends JComponent implements ActionListener {
     boolean lightsOut = false;
     boolean FahadInRoom = false;
     boolean JadenInRoom = false;
+    boolean noPower = false;
     
 
     //main menu buttons
@@ -181,7 +183,7 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.white);
             g.drawString("Night " + night, WIDTH / 2 - 100, HEIGHT / 2 + 25);
             g.drawString((compareTime - loadTime) / 60 + "%", 1180, 700);
-        } else if (office) {
+        } else if (!noPower && office) {
             g.setColor(Color.white);
             g.setFont(buttons);
             g.drawString(Math.round(o.getPower()) + "%", 1, 50);
@@ -229,6 +231,14 @@ public class Main extends JComponent implements ActionListener {
                 g.drawString("[VIDEO FEED UNAVAILABLE]", 45, 200);
             }
             
+        }else if(winScreen){
+            g.setColor(Color.black);
+            g.fillRect(0, 0, 1280, 720);
+            g.setColor(Color.white);
+            g.setFont(noVid);
+            g.drawString("6AM", WIDTH/2 - 75, HEIGHT/2 - 25);
+            g.setFont(buttons);
+            g.drawString("Congratulations!", WIDTH/2 - 175, HEIGHT/2 + 75);
         }
 
         // GAME DRAWING ENDS HERE
@@ -280,10 +290,35 @@ public class Main extends JComponent implements ActionListener {
             }
             o.decreasePower(System.currentTimeMillis());
             f.moveOpprotunity(curCam);
+            if(t.getTime() == 6){
+                office = false;
+                winScreen = true;
+                compareTime = System.currentTimeMillis() - 1000;
+                o.reset();
+            }else if(o.getPower() <= 0){
+                noPower = true;
+                o.allOff();
+            }
         } else if (camera) {
             currentImage = curCam;
             o.decreasePower(System.currentTimeMillis());
             f.moveOpprotunity(curCam);
+            if(t.getTime() == 6){
+                camera = false;
+                winScreen = true;
+                compareTime = System.currentTimeMillis() - 1000;
+                o.reset();
+            }else if(o.getPower() <= 0){
+                noPower = true;
+                office = true;
+                camera = false;
+                o.allOff();
+            }
+        }else if (winScreen){
+            if(((System.currentTimeMillis() - compareTime)/1000) % 6 == 0){
+                winScreen = false;
+                onMenu = true;
+            }
         }
 
     }
@@ -312,20 +347,20 @@ public class Main extends JComponent implements ActionListener {
                     night = menu.load(1);
                 }
             } else if (office) {
-                if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
+                if (!noPower && e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = true;
                     o.setCam();
                     office = false;
                 }else if(lookingLeft){
-                    if(e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height){
+                    if(!noPower && e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height){
                         o.setDoor1();
-                    }else if(e.getX() > leftHallLight.x && e.getX() < leftHallLight.x + leftHallLight.width && e.getY() > leftHallLight.y && e.getY() < leftHallLight.y + leftHallLight.height){
+                    }else if(!noPower && e.getX() > leftHallLight.x && e.getX() < leftHallLight.x + leftHallLight.width && e.getY() > leftHallLight.y && e.getY() < leftHallLight.y + leftHallLight.height){
                         o.setLight1();
                     }
                 }else if(!lookingLeft){
-                    if(e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height){
+                    if(!noPower && e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height){
                         o.setDoor2();
-                    }else if(e.getX() > rightHallLight.x && e.getX() < rightHallLight.x + rightHallLight.width && e.getY() > rightHallLight.y && e.getY() < rightHallLight.y + rightHallLight.height){
+                    }else if(!noPower && e.getX() > rightHallLight.x && e.getX() < rightHallLight.x + rightHallLight.width && e.getY() > rightHallLight.y && e.getY() < rightHallLight.y + rightHallLight.height){
                         o.setLight2();
                     }
                 }

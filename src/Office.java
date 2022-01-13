@@ -13,13 +13,27 @@ import java.awt.image.BufferedImage;
 public class Office {
 
     // create instance variavles 
-    private static double power = 100;
+    private double power = 100;
     private boolean door1 = false;
     private boolean door2 = false;
     private boolean light1 = false;
     private boolean light2 = false;
     private boolean cam = false;
     private long last = System.currentTimeMillis();
+
+    public Office() {
+
+    }
+
+    //resets the power
+    public void reset() {
+        this.power = 100;
+        this.door1 = false;
+        this.door2 = false;
+        this.light1 = false;
+        this.light2 = false;
+        this.cam = false;
+    }
 
     // setter classes  
     public boolean setDoor1() {
@@ -96,34 +110,44 @@ public class Office {
         return power;
     }
 
+    //sets all elecronics off when power is out
+    public void allOff() {
+        door1 = false;
+        door2 = false;
+        light1 = false;
+        light2 = false;
+        cam = false;
+    }
+
     public void decreasePower(long time) {
-        if ((time - last) / 100 > 20) {
-            // subtract 5 from the power when nothings being used every ...time
-            power = power - .5;
+        if (power > 0) {
+            if ((time - last) / 100 > 20) {
+                // subtract 5 from the power when nothings being used every ...time
+                power = power - .5;
 
-            // subtract power when different electronics used
-            if (door1 == true) {
-                power = power - 1;
-            }
+                // subtract power when different electronics used
+                if (door1 == true) {
+                    power = power - 1;
+                }
 
-            if (door2 == true) {
-                power = power - 1;
-            }
+                if (door2 == true) {
+                    power = power - 1;
+                }
 
-            if (light1 == true) {
-                power = power - 1;
-            }
+                if (light1 == true) {
+                    power = power - 1;
+                }
 
-            if (light2 == true) {
-                power = power - 1;
-            }
+                if (light2 == true) {
+                    power = power - 1;
+                }
 
-            if (cam == true) {
-                power = power - 1;
+                if (cam == true) {
+                    power = power - 1;
+                }
+                last = System.currentTimeMillis();
             }
-            last = System.currentTimeMillis();
         }
-
     }
 
 }
