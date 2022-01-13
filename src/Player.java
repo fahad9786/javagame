@@ -57,7 +57,6 @@ public class Player {
             rightDoor = ImageIO.read(new File("images//rightDoor.PNG"));
             leftHallLit = ImageIO.read(new File("images//leftHallLit.jpg"));
             rightHallLit = ImageIO.read(new File("images//rightHallLit.jpg"));
-            //leftWindowLit = ImageIO.read(new File("images//leftWindowLit.jpg"));
         }catch(Exception e){
             e.printStackTrace();
         }

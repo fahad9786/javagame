@@ -9,12 +9,12 @@ import javax.imageio.ImageIO;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author pione
  */
-public class Jaden extends Fahad{
+public class Jaden extends Fahad {
+
     public BufferedImage jad1;
     private int roomNum;
     private int difficulty;
@@ -22,53 +22,58 @@ public class Jaden extends Fahad{
     private int moveTime = 75;
     private int camNum;
     private boolean inRoom = false;
-    
+
     private long startTime;
-    
-    public Jaden(Office o, Player p, MainMenu m){
+
+    public Jaden(Office o, Player p, MainMenu m) {
         super(o, p, m);
         roomNum = 0;
-        try{
+        try {
             jad1 = ImageIO.read(new File("images//jad1.jpg"));
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    
+
     @Override
-    public void startNight(){
+    public void startNight() {
         this.startTime = System.currentTimeMillis() + 5000;
         setDifficulty();
     }
-    
+
     @Override
-    public void setDifficulty(){
-        try{
+    public void setDifficulty() {
+        try {
             Scanner scan = new Scanner(new File("Config.txt"));
             int diff = scan.nextInt();
-            if(diff == 1){
+            if (diff == 1) {
+                this.difficulty = 1;
+            } else if (diff == 2) {
                 this.difficulty = 2;
-            }else if(diff == 2){
+            } else if (diff == 3) {
                 this.difficulty = 4;
-            }else if(diff == 3){
+            } else if (diff == 4) {
                 this.difficulty = 8;
-            }else if(diff == 4){
-                this.difficulty = 10;
-            }else if(diff == 5){
+            } else if (diff == 5) {
                 this.difficulty = 14;
             }
             System.out.println(difficulty);
             chance = difficulty * 0.05;
-        }catch(Exception e){
+            System.out.println(chance);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void moveOpprotunity(){
-        if((System.currentTimeMillis() - startTime)/100 > moveTime && roomNum < 6 && Math.random() < chance){
-            System.out.println("jaden");
-            roomNum++;
-            startTime = System.currentTimeMillis() - 1000;
+
+    public void moveOpprotunity() {
+        if ((System.currentTimeMillis() - startTime) / 100 > moveTime) {
+            if (roomNum < 6 && Math.random() < chance) {
+                roomNum++;
+                startTime = System.currentTimeMillis() - 1000;
+            }else{
+                startTime = System.currentTimeMillis() - 1000;
+            }
+
         }
     }
 
@@ -76,5 +81,5 @@ public class Jaden extends Fahad{
     public int getRoom() {
         return roomNum;
     }
-    
+
 }

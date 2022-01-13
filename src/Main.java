@@ -64,7 +64,7 @@ public class Main extends JComponent implements ActionListener {
     boolean drawFace = false;
     int night; // current night the player is on
     int time;
-    int winScreenTime = 5; //time spent on win screen
+    int winScreenTime = 6; //time spent on win screen - set as 1 second over disired time
 
     boolean onMenu = true;
     boolean office = false;
@@ -341,6 +341,7 @@ public class Main extends JComponent implements ActionListener {
                 camera = false;
                 winScreen = true;
                 compareTime = System.currentTimeMillis() - 1000;
+                a.nightEnd();
                 o.reset();
             }else if(o.getPower() <= 0){
                 noPower = true;
@@ -349,7 +350,8 @@ public class Main extends JComponent implements ActionListener {
                 o.allOff();
             }
         }else if (winScreen){
-            if(((System.currentTimeMillis() - compareTime)/1000) % winScreenTime + 1 == 0){
+            if(((System.currentTimeMillis() - compareTime)/1000) % winScreenTime == 0){
+                System.out.println("hi");
                 winScreen = false;
                 onMenu = true;
                 menu.nextNight();
@@ -368,7 +370,7 @@ public class Main extends JComponent implements ActionListener {
             }
         }
         
-        if(office && FahadInRoom && Math.random() < f.getChance()){
+        if(office && FahadInRoom && Math.random() < f.getChance() / 2){
             currentImage = f.jumpScare();
             a.nightEnd();
             a.jumpScare();
@@ -388,6 +390,7 @@ public class Main extends JComponent implements ActionListener {
             //mouse events during the menu screen
             if (onMenu) {
                 if (e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height) {
+                    night = menu.load(0);
                     onMenu = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
@@ -397,7 +400,6 @@ public class Main extends JComponent implements ActionListener {
                     f.startNight();
                     j.startNight();
                     loadNight = true;
-                    night = menu.load(0);
                 } else if (e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height) {
                     onMenu = false;
                     loadTime = System.currentTimeMillis();

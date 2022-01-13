@@ -27,6 +27,7 @@ public class Fahad {
     
     private long startTime;
     public BufferedImage fad1;
+    private BufferedImage fadJump;
     
     public Fahad(Office o, Player p, MainMenu m){
         roomNum = 0;
@@ -34,7 +35,8 @@ public class Fahad {
         this.p = p;
         this.m = m;
         try{
-            fad1 = ImageIO.read(new File("images//fahad_1_30.jpg"));
+            fad1 = ImageIO.read(new File("images//Fahad_1_30.jpg"));
+            fadJump = ImageIO.read(new File("images//Fahad_2.jpg"));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -103,7 +105,7 @@ public class Fahad {
     }
     
     public BufferedImage jumpScare(){
-        return fad1;
+        return fadJump;
     }
     
     public void setRoom(int room){
