@@ -54,6 +54,7 @@ public class Main extends JComponent implements ActionListener {
     BufferedImage currentImage;
     BufferedImage fahad;
     
+    
     MainMenu menu = new MainMenu();
     BufferedImage smile = menu.getScary(0);
     BufferedImage baw = menu.getScary(1);

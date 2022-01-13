@@ -29,7 +29,7 @@ public class Fahad {
     public BufferedImage fad1;
     
     public Fahad(Office o, Player p, MainMenu m){
-        roomNum = 0;
+        roomNum = 5;
         this.o = o;
         this.p = p;
         this.m = m;
