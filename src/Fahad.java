@@ -40,7 +40,7 @@ public class Fahad {
     }
     
     public void startNight(){
-        this.startTime = System.currentTimeMillis() - 5000;
+        this.startTime = System.currentTimeMillis() + 5000;
         setDifficulty();
     }
     

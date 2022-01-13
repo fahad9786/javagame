@@ -80,6 +80,18 @@ public class MainMenu {
         
     }
     
+    public void nextNight(){
+        try{
+            nightNum = new Scanner(new File("Config.txt"));
+            int curNit = nightNum.nextInt();
+            PrintWriter output = new PrintWriter(new File("Config.txt"));
+            output.println(curNit + 1);
+            output.close();
+        }catch(Exception e){
+            
+        }
+    }
+    
     
     
     public BufferedImage getImage(int i){

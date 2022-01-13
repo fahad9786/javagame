@@ -318,6 +318,7 @@ public class Main extends JComponent implements ActionListener {
             if(((System.currentTimeMillis() - compareTime)/1000) % 6 == 0){
                 winScreen = false;
                 onMenu = true;
+                menu.nextNight();
             }
         }
 
