@@ -352,6 +352,7 @@ public class Main extends JComponent implements ActionListener {
             if (t.getTime() == 6) {
                 office = false;
                 winScreen = true;
+                noPower = false;
                 compareTime = System.currentTimeMillis() - 1000;
                 a.nightEnd();
                 o.reset();
