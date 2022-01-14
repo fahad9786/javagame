@@ -25,6 +25,8 @@ public class AudioController {
     private final MediaPlayer footsteps;
     private final MediaPlayer atDoor;
     private final MediaPlayer buttonNotWork;
+    private final MediaPlayer lose;
+    private final MediaPlayer door;
     
     public AudioController(){
         Media fanMed = new Media(new File("Audio//officeAmbiance.mp3").toURI().toString());
@@ -36,6 +38,8 @@ public class AudioController {
         Media footstepsMed = new Media(new File("Audio//footsteps.mp3").toURI().toString());
         Media atDoorMed = new Media(new File("Audio//atDoor.mp3").toURI().toString());
         Media buttonNotWorkMed = new Media(new File("Audio//buttonNotWork.mp3").toURI().toString());
+        Media loseMed = new Media(new File("Audio//static.mp3").toURI().toString());
+        Media doorMed = new Media(new File("Audio//door.mp3").toURI().toString());
         
         fan = new MediaPlayer(fanMed);
         scream = new MediaPlayer(screamMed);
@@ -46,9 +50,12 @@ public class AudioController {
         footsteps = new MediaPlayer(footstepsMed);
         atDoor = new MediaPlayer(atDoorMed);
         buttonNotWork = new MediaPlayer(buttonNotWorkMed);
+        lose = new MediaPlayer(loseMed);
+        door = new MediaPlayer(doorMed);
     }
     
     public void menu(){
+        lose.stop();
         if(menu.getStopTime().compareTo(menu.getCurrentTime()) > 0){
             menu.play();
         }else{
@@ -60,6 +67,11 @@ public class AudioController {
         menu.stop();
     }
     
+    public void lose(){
+        lose.seek(Duration.ZERO);
+        lose.play();
+    }
+    
     public void monitor(){
         monitor.seek(Duration.ZERO);
         monitor.play();
@@ -67,6 +79,8 @@ public class AudioController {
     
     public void nightStart(){
         fan.seek(Duration.ZERO);
+        win.stop();
+        win.seek(Duration.ZERO);
         fan.play();
     }
     
@@ -102,5 +116,10 @@ public class AudioController {
     
     public void nightEnd(){
         fan.stop();
+    }
+    
+    public void door(){
+        door.seek(Duration.ZERO);
+        door.play();
     }
 }

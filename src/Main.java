@@ -227,7 +227,7 @@ public class Main extends JComponent implements ActionListener {
             } else if (curCam == p.Cam4A && f.getRoom() == 4) {
                 g.drawImage(f.fad1, 500, 300, null);
             } else if (curCam == p.Cam4B && f.getRoom() == 5) {
-                g.drawImage(f.fad1, 500, 300, null);
+                g.drawImage(f.fad2, 0, 0, null);
             }
 
             //draws Jaden in the correct room
@@ -236,13 +236,13 @@ public class Main extends JComponent implements ActionListener {
             } else if (curCam == p.Cam1B && j.getRoom() == 1) {
                 g.drawImage(j.jad1, 300, 400, null);
             } else if (curCam == p.Cam5 && j.getRoom() == 2) {
-                g.drawImage(j.jad1, 300, 400, null);
+                g.drawImage(j.jad1, 600, 300, null);
             } else if (curCam == p.Cam2A && j.getRoom() == 3) {
-                g.drawImage(j.jad1, 300, 400, null);
+                g.drawImage(j.jad1, 700, 150, null);
             } else if (curCam == p.Cam3 && j.getRoom() == 4) {
-                g.drawImage(j.jad1, 300, 400, null);
+                g.drawImage(j.jad1, 500, 200, null);
             } else if (curCam == p.Cam2B && j.getRoom() == 5) {
-                g.drawImage(j.jad1, 300, 400, null);
+                g.drawImage(j.jad1, 700, 200, null);
             }
 
             g.setColor(Color.white);
@@ -373,6 +373,7 @@ public class Main extends JComponent implements ActionListener {
                 o.allOff();
             }
         } else if (winScreen) {
+            a.win();
             if (((System.currentTimeMillis() - compareTime) / 1000) % winScreenTime == 0) {
                 System.out.println("hi");
                 winScreen = false;
@@ -384,6 +385,7 @@ public class Main extends JComponent implements ActionListener {
                 currentImage = null; //clears the current image so the jumpscare image does not flash again
                 loseScreen = true;
                 isDead = false;
+                a.lose();
             }
         } else if (loseScreen) {
             if (((System.currentTimeMillis() - compareTime) / 1000) % 10 == 0) {
@@ -414,6 +416,7 @@ public class Main extends JComponent implements ActionListener {
             a.nightEnd();
             a.jumpScare();
             office = false;
+            camera = false;
             isDead = true;
             compareTime = System.currentTimeMillis() - 1000;
         }
@@ -421,6 +424,8 @@ public class Main extends JComponent implements ActionListener {
         if (noPower) {
             if(Math.round(((System.currentTimeMillis() - compareTime)/1000) % footstepTimer) == 0){
                 a.footsteps();
+            }else if(Math.round(((System.currentTimeMillis() - compareTime)/1000) % musicTimer) == 0){
+                
             }
         }
 
@@ -431,7 +436,7 @@ public class Main extends JComponent implements ActionListener {
             System.out.println(footstepTimer);
             musicTimer = footstepTimer * 1.5;
             jumpscareTimer = musicTimer * 1.5;
-            compareTime = System.currentTimeMillis() - 1000;
+            compareTime = System.currentTimeMillis() + 1000;
         }
 
     }
@@ -481,6 +486,7 @@ public class Main extends JComponent implements ActionListener {
                     if (!noPower && e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height) {
                         if(!JadenInRoom){
                             o.setDoor1();
+                            a.door();
                         }else{
                             a.buttonNotWork();
                         }
@@ -499,6 +505,7 @@ public class Main extends JComponent implements ActionListener {
                     if (!noPower && e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height) {
                         if(!FahadInRoom){
                             o.setDoor2();
+                            a.door();
                         }else{
                             a.buttonNotWork();
                         }

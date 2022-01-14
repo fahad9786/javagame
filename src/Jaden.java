@@ -73,9 +73,11 @@ public class Jaden extends Fahad {
                 startTime = System.currentTimeMillis() - 1000;
             }else if(roomNum == 6 && Math.random() < chance && o.getDoor1()){
                 roomNum = 1;
+                startTime = System.currentTimeMillis() - 1000;
             }else if(roomNum == 6 && Math.random() < chance && !o.getDoor1()){
                 roomNum = 7;
                 inRoom = true;
+                startTime = System.currentTimeMillis() - 1000;
             }else{
                 startTime = System.currentTimeMillis() - 1000;
             }
@@ -104,7 +106,7 @@ public class Jaden extends Fahad {
     }
     
     public void reset(){
-        roomNum = 0;
+        roomNum = 4;
         inRoom = false;
     }
     
