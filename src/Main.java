@@ -69,6 +69,8 @@ public class Main extends JComponent implements ActionListener {
     double footstepTimer;
     double musicTimer;
     double jumpscareTimer;
+    boolean playedFootsteps = false;
+    boolean playedMusic = false;
 
     boolean onMenu = true;
     boolean office = false;
@@ -420,24 +422,40 @@ public class Main extends JComponent implements ActionListener {
             isDead = true;
             compareTime = System.currentTimeMillis() - 1000;
         }
-
-        if (noPower) {
-            if(Math.round(((System.currentTimeMillis() - compareTime)/1000) % footstepTimer) == 0){
+        //when the power goes out
+        if (noPower && !powerAudio) {
+            JadenInRoom = false;
+            FahadInRoom = false;
+            powerAudio = true;
+            a.noPower();
+            footstepTimer = Math.round(Math.random() * 10 + 3);
+            System.out.println(footstepTimer);
+            musicTimer = footstepTimer + (Math.random() * (Math.random() * 15));
+            System.out.println(musicTimer);
+            jumpscareTimer = Math.round(Math.random() * 10);
+            System.out.println(jumpscareTimer);
+            compareTime = System.currentTimeMillis() - 1000;
+        }else if (noPower) {
+            System.out.println(((System.currentTimeMillis() - compareTime)/1000));
+            if(!playedFootsteps && ((System.currentTimeMillis() - compareTime)/1000) > footstepTimer){
                 a.footsteps();
-            }else if(Math.round(((System.currentTimeMillis() - compareTime)/1000) % musicTimer) == 0){
-                
+                playedFootsteps = true;
+            }else if(!playedMusic && Math.round(((System.currentTimeMillis() - compareTime)/1000) % musicTimer) == 0){
+                a.music();
+                playedMusic = true;
+                compareTime = System.currentTimeMillis() - 1000;
+            }else if(playedFootsteps && playedMusic && (Math.round(System.currentTimeMillis() - compareTime)/1000) == jumpscareTimer){
+                currentImage = f.jumpScare();
+                a.nightEnd();
+                a.jumpScare();
+                office = false;
+                isDead = true;
+                noPower = false;
+                compareTime = System.currentTimeMillis() - 1000;
             }
         }
 
-        if (noPower && !powerAudio) {
-            powerAudio = true;
-            a.noPower();
-            footstepTimer = Math.random() * 10;
-            System.out.println(footstepTimer);
-            musicTimer = footstepTimer * 1.5;
-            jumpscareTimer = musicTimer * 1.5;
-            compareTime = System.currentTimeMillis() + 1000;
-        }
+
 
     }
     // Used to implement any of the Mouse Actions
