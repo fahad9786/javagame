@@ -192,7 +192,6 @@ public class Main extends JComponent implements ActionListener {
             g.fillRect(0, 0, WIDTH, HEIGHT);
             g.setColor(Color.white);
             g.drawString("Night " + night, WIDTH / 2 - 100, HEIGHT / 2 + 25);
-            g.drawString((compareTime - loadTime) / 60 + "%", 1180, 700);
         } else if (!noPower && office) {
             g.setColor(Color.white);
             g.setFont(buttons);
@@ -430,14 +429,10 @@ public class Main extends JComponent implements ActionListener {
             powerAudio = true;
             a.noPower();
             footstepTimer = Math.round(Math.random() * 10 + 3);
-            System.out.println(footstepTimer);
             musicTimer = footstepTimer + (Math.random() * (Math.random() * 15)) + 2;
-            System.out.println(musicTimer);
             jumpscareTimer = Math.round(Math.random() * 10) + 2;
-            System.out.println(jumpscareTimer);
             compareTime = System.currentTimeMillis() - 1000;
         }else if (noPower) {
-            System.out.println(((System.currentTimeMillis() - compareTime)/1000));
             if(!playedFootsteps && ((System.currentTimeMillis() - compareTime)/1000) > footstepTimer){
                 a.footsteps();
                 playedFootsteps = true;
