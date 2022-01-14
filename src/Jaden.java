@@ -21,7 +21,6 @@ public class Jaden extends Fahad {
     private int difficulty;
     private double chance;
     private int moveTime = 75;
-    private int camNum;
     private boolean inRoom = false;
 
     private long startTime;
@@ -102,6 +101,11 @@ public class Jaden extends Fahad {
     @Override
     public BufferedImage jumpScare(){
         return jadJump;
+    }
+    
+    public void reset(){
+        roomNum = 0;
+        inRoom = false;
     }
     
 }

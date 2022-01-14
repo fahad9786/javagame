@@ -419,12 +419,19 @@ public class Main extends JComponent implements ActionListener {
         }
 
         if (noPower) {
-
+            if(Math.round(((System.currentTimeMillis() - compareTime)/1000) % footstepTimer) == 0){
+                a.footsteps();
+            }
         }
 
         if (noPower && !powerAudio) {
             powerAudio = true;
             a.noPower();
+            footstepTimer = Math.random() * 10;
+            System.out.println(footstepTimer);
+            musicTimer = footstepTimer * 1.5;
+            jumpscareTimer = musicTimer * 1.5;
+            compareTime = System.currentTimeMillis() - 1000;
         }
 
     }
@@ -446,6 +453,7 @@ public class Main extends JComponent implements ActionListener {
                     o.reset();
                     a.noMenu();
                     f.reset();
+                    j.reset();
                     f.startNight();
                     j.startNight();
                     loadNight = true;
@@ -457,6 +465,7 @@ public class Main extends JComponent implements ActionListener {
                     o.reset();
                     a.noMenu();
                     f.reset();
+                    j.reset();
                     f.startNight();
                     j.startNight();
                     loadNight = true;
