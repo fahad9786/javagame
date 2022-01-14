@@ -28,6 +28,7 @@ public class AudioController {
     private final MediaPlayer lose;
     private final MediaPlayer door;
     private final MediaPlayer music;
+    private final MediaPlayer nightStart;
     
     public AudioController(){
         Media fanMed = new Media(new File("Audio//officeAmbiance.mp3").toURI().toString());
@@ -42,6 +43,7 @@ public class AudioController {
         Media loseMed = new Media(new File("Audio//static.mp3").toURI().toString());
         Media doorMed = new Media(new File("Audio//door.mp3").toURI().toString());
         Media musicMed = new Media(new File("Audio//music.mp3").toURI().toString());
+        Media nightStartMed = new Media(new File("Audio//nightStart.mp3").toURI().toString());
         
         fan = new MediaPlayer(fanMed);
         scream = new MediaPlayer(screamMed);
@@ -55,6 +57,7 @@ public class AudioController {
         lose = new MediaPlayer(loseMed);
         door = new MediaPlayer(doorMed);
         music = new MediaPlayer(musicMed);
+        nightStart = new MediaPlayer(nightStartMed);
     }
     
     public void menu(){
@@ -68,6 +71,8 @@ public class AudioController {
     
     public void noMenu(){
         menu.stop();
+        nightStart.seek(Duration.ZERO);
+        nightStart.play();
     }
     
     public void music(){
