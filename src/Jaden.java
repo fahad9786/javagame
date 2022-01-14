@@ -106,7 +106,7 @@ public class Jaden extends Fahad {
     }
     
     public void reset(){
-        roomNum = 4;
+        roomNum = 0;
         inRoom = false;
     }
     

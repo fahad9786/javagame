@@ -110,6 +110,7 @@ public class Fahad {
         return fadJump;
     }
     
+    
     public void setRoom(int room){
         this.roomNum = room;
     }
@@ -128,7 +129,7 @@ public class Fahad {
     }
     
     public void reset(){
-        roomNum = 5;
+        roomNum = 0;
         inRoom = false;
         camNum = 0;
     }

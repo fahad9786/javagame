@@ -154,8 +154,8 @@ public class Office {
     public void decreasePower(long time) {
         if (power > 0) {
             if ((time - last) / 100 > 20) {
-                // subtract 5 from the power when nothings being used every ...time
-                power = power - .5;
+                // subtract from the power when nothings being used every ...time
+                power = power - 0.3;
 
                 // subtract power when different electronics used
                 if (door1 == true) {

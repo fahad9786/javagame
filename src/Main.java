@@ -431,9 +431,9 @@ public class Main extends JComponent implements ActionListener {
             a.noPower();
             footstepTimer = Math.round(Math.random() * 10 + 3);
             System.out.println(footstepTimer);
-            musicTimer = footstepTimer + (Math.random() * (Math.random() * 15));
+            musicTimer = footstepTimer + (Math.random() * (Math.random() * 15)) + 2;
             System.out.println(musicTimer);
-            jumpscareTimer = Math.round(Math.random() * 10);
+            jumpscareTimer = Math.round(Math.random() * 10) + 2;
             System.out.println(jumpscareTimer);
             compareTime = System.currentTimeMillis() - 1000;
         }else if (noPower) {
