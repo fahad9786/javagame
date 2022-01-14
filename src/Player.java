@@ -28,6 +28,8 @@ public class Player {
     
     public BufferedImage left;
     public BufferedImage right;
+    public BufferedImage leftNoPower;
+    public BufferedImage rightNoPower;
     public BufferedImage butLeft;
     public BufferedImage butRight;
     public BufferedImage leftDoor;
@@ -57,6 +59,8 @@ public class Player {
             rightDoor = ImageIO.read(new File("images//rightDoor.PNG"));
             leftHallLit = ImageIO.read(new File("images//leftHallLit.jpg"));
             rightHallLit = ImageIO.read(new File("images//rightHallLit.jpg"));
+            leftNoPower = ImageIO.read(new File("images//officeLeftNoPower.jpg"));
+            rightNoPower = ImageIO.read(new File("images//officeRightNoPower.jpg"));
         }catch(Exception e){
             e.printStackTrace();
         }

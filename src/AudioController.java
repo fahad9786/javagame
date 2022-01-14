@@ -16,21 +16,36 @@ import javafx.util.Duration;
  */
 public class AudioController {
     final JFXPanel fxPanel = new JFXPanel();
-    MediaPlayer scream;
-    MediaPlayer fan;
-    MediaPlayer menu;
-    MediaPlayer monitor;
+    private final MediaPlayer scream;
+    private final MediaPlayer fan;
+    private final MediaPlayer menu;
+    private final MediaPlayer monitor;
+    private final MediaPlayer win;
+    private final MediaPlayer powerOut;
+    private final MediaPlayer footsteps;
+    private final MediaPlayer atDoor;
+    private final MediaPlayer buttonNotWork;
     
     public AudioController(){
         Media fanMed = new Media(new File("Audio//officeAmbiance.mp3").toURI().toString());
         Media screamMed = new Media(new File("Audio//Scream.mp3").toURI().toString());
         Media menuMed = new Media(new File("Audio//menu.mp3").toURI().toString());
         Media monitorMed = new Media(new File("Audio//monitor.mp3").toURI().toString());
+        Media winMed = new Media(new File("Audio//win.mp3").toURI().toString());
+        Media powerOutMed = new Media(new File("Audio//powerOut.mp3").toURI().toString());
+        Media footstepsMed = new Media(new File("Audio//footsteps.mp3").toURI().toString());
+        Media atDoorMed = new Media(new File("Audio//atDoor.mp3").toURI().toString());
+        Media buttonNotWorkMed = new Media(new File("Audio//buttonNotWork.mp3").toURI().toString());
         
         fan = new MediaPlayer(fanMed);
         scream = new MediaPlayer(screamMed);
         menu = new MediaPlayer(menuMed);
         monitor = new MediaPlayer(monitorMed);
+        win = new MediaPlayer(winMed);
+        powerOut = new MediaPlayer(powerOutMed);
+        footsteps = new MediaPlayer(footstepsMed);
+        atDoor = new MediaPlayer(atDoorMed);
+        buttonNotWork = new MediaPlayer(buttonNotWorkMed);
     }
     
     public void menu(){
@@ -61,7 +76,28 @@ public class AudioController {
     }
     
     public void noPower(){
-        
+        fan.stop();
+        powerOut.seek(Duration.ZERO);
+        powerOut.play();
+    }
+    
+    public void win(){
+        win.play();
+    }
+    
+    public void atDoor(){
+        atDoor.seek(Duration.ZERO);
+        atDoor.play();
+    }
+    
+    public void buttonNotWork(){
+        buttonNotWork.seek(Duration.ZERO);
+        buttonNotWork.play();
+    }
+    
+    public void footsteps(){
+        footsteps.seek(Duration.ZERO);
+        footsteps.play();
     }
     
     public void nightEnd(){

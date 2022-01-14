@@ -53,8 +53,7 @@ public class Main extends JComponent implements ActionListener {
 
     BufferedImage currentImage;
     BufferedImage fahad;
-    
-    
+
     MainMenu menu = new MainMenu();
     BufferedImage smile = menu.getScary(0);
     BufferedImage baw = menu.getScary(1);
@@ -65,6 +64,11 @@ public class Main extends JComponent implements ActionListener {
     int night; // current night the player is on
     int time;
     int winScreenTime = 6; //time spent on win screen - set as 1 second over disired time
+    
+    //the following labeled 'timer' are for when the power goes out
+    double footstepTimer;
+    double musicTimer;
+    double jumpscareTimer;
 
     boolean onMenu = true;
     boolean office = false;
@@ -78,7 +82,8 @@ public class Main extends JComponent implements ActionListener {
     boolean FahadInRoom = false;
     boolean JadenInRoom = false;
     boolean noPower = false;
-    
+    boolean powerAudio = false; //keeps track of if the out of power audio has already played. prevents audio repeating forever
+    boolean doorSeenJad = false; //switches if jaden has been seen outside the door
 
     //main menu buttons
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
@@ -98,7 +103,7 @@ public class Main extends JComponent implements ActionListener {
     Rectangle cam7 = new Rectangle(1210, 550, 38, 27);
     BufferedImage curCam; // curent camera
     boolean camUI = false; // if camera needs extra UI elements (cam 6)
-    
+
     //door buttons
     Rectangle leftDoorBut = new Rectangle(35, 426, 42, 100);
     Rectangle rightDoorBut = new Rectangle(1203, 426, 42, 100);
@@ -195,51 +200,51 @@ public class Main extends JComponent implements ActionListener {
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
                 g.drawImage(p.butLeft, 20, 400, null);
-                if(o.getDoor1()){
+                if (o.getDoor1()) {
                     g.drawImage(p.leftDoor, 100, 50, null);
-                }else if(o.getLight1()){
+                } else if (o.getLight1()) {
                     g.drawImage(p.leftHallLit, 100, 50, null);
                 }
-                if(j.getRoom() == 6 && o.getLight1()){
+                if (j.getRoom() == 6 && o.getLight1()) {
                     g.drawImage(j.jad1, 200, 100, null);
                 }
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
-                if(o.getDoor2()){
+                if (o.getDoor2()) {
                     g.drawImage(p.rightDoor, 980, 50, null);
-                }else if(o.getLight2()){
+                } else if (o.getLight2()) {
                     g.drawImage(p.rightHallLit, 980, 50, null);
                 }
             }
         } else if (camera) {
             //draws Fahad in the correct room
-            if(curCam == p.Cam1A && f.getRoom() == 0){
+            if (curCam == p.Cam1A && f.getRoom() == 0) {
                 g.drawImage(f.fad1, 500, 300, null);
-            }else if(curCam == p.Cam1B && f.getRoom() == 1){
+            } else if (curCam == p.Cam1B && f.getRoom() == 1) {
                 g.drawImage(f.fad1, 600, 10, null);
-            }else if(curCam == p.Cam7 && f.getRoom() == 2){
+            } else if (curCam == p.Cam7 && f.getRoom() == 2) {
                 g.drawImage(f.fad1, 450, 300, null);
-            }else if(curCam == p.Cam4A && f.getRoom() == 4){
+            } else if (curCam == p.Cam4A && f.getRoom() == 4) {
                 g.drawImage(f.fad1, 500, 300, null);
-            }else if(curCam == p.Cam4B && f.getRoom() == 5){
+            } else if (curCam == p.Cam4B && f.getRoom() == 5) {
                 g.drawImage(f.fad1, 500, 300, null);
             }
-            
+
             //draws Jaden in the correct room
-            if(curCam == p.Cam1A && j.getRoom() == 0){
+            if (curCam == p.Cam1A && j.getRoom() == 0) {
                 g.drawImage(j.jad1, 250, 350, null);
-            }else if(curCam == p.Cam1B && j.getRoom() == 1){
+            } else if (curCam == p.Cam1B && j.getRoom() == 1) {
                 g.drawImage(j.jad1, 300, 400, null);
-            }else if(curCam == p.Cam5 && j.getRoom() == 2){
+            } else if (curCam == p.Cam5 && j.getRoom() == 2) {
                 g.drawImage(j.jad1, 300, 400, null);
-            }else if(curCam == p.Cam2A && j.getRoom() == 3){
+            } else if (curCam == p.Cam2A && j.getRoom() == 3) {
                 g.drawImage(j.jad1, 300, 400, null);
-            }else if(curCam == p.Cam3 && j.getRoom() == 4){
+            } else if (curCam == p.Cam3 && j.getRoom() == 4) {
                 g.drawImage(j.jad1, 300, 400, null);
-            }else if(curCam == p.Cam2B && j.getRoom() == 5){
+            } else if (curCam == p.Cam2B && j.getRoom() == 5) {
                 g.drawImage(j.jad1, 300, 400, null);
             }
-            
+
             g.setColor(Color.white);
             g.setFont(buttons);
             g.setColor(Color.gray);
@@ -252,16 +257,16 @@ public class Main extends JComponent implements ActionListener {
                 g.setFont(noVid);
                 g.drawString("[VIDEO FEED UNAVAILABLE]", 45, 200);
             }
-            
-        }else if(winScreen){
+
+        } else if (winScreen) {
             g.setColor(Color.black);
             g.fillRect(0, 0, 1280, 720);
             g.setColor(Color.white);
             g.setFont(noVid);
-            g.drawString("6AM", WIDTH/2 - 75, HEIGHT/2 - 25);
+            g.drawString("6AM", WIDTH / 2 - 75, HEIGHT / 2 - 25);
             g.setFont(buttons);
-            g.drawString("Congratulations!", WIDTH/2 - 175, HEIGHT/2 + 75);
-        }else if(loseScreen){
+            g.drawString("Congratulations!", WIDTH / 2 - 175, HEIGHT / 2 + 75);
+        } else if (loseScreen) {
             g.setColor(Color.black);
             g.fillRect(0, 0, 1280, 720);
             g.setColor(Color.white);
@@ -312,8 +317,9 @@ public class Main extends JComponent implements ActionListener {
                 office = true;
                 a.nightStart();
             }
-        } else if (office) {
+        } else if (office && !noPower) {
             FahadInRoom = f.inRoom();
+            JadenInRoom = j.inRoom();
             if (lookingLeft) {
                 currentImage = p.left;
             } else if (!lookingLeft) {
@@ -322,47 +328,65 @@ public class Main extends JComponent implements ActionListener {
             o.decreasePower(System.currentTimeMillis());
             f.moveOpprotunity(curCam);
             j.moveOpprotunity();
-            if(t.getTime() == 6){
+            if (t.getTime() == 6) {
                 office = false;
                 winScreen = true;
                 compareTime = System.currentTimeMillis() - 1000;
                 a.nightEnd();
                 o.reset();
-            }else if(o.getPower() <= 0){
+            } else if (o.getPower() <= 0) {
                 noPower = true;
                 o.allOff();
+            }else if(doorSeenJad && j.getRoom() != 6){
+                doorSeenJad = false;
+            }
+        } else if (office && noPower) {
+            if (lookingLeft) {
+                currentImage = p.leftNoPower;
+            } else if (!lookingLeft) {
+                currentImage = p.rightNoPower;
+            }
+
+            if (t.getTime() == 6) {
+                office = false;
+                winScreen = true;
+                compareTime = System.currentTimeMillis() - 1000;
+                a.nightEnd();
+                o.reset();
             }
         } else if (camera) {
+            JadenInRoom = j.inRoom();
             currentImage = curCam;
             o.decreasePower(System.currentTimeMillis());
             f.moveOpprotunity(curCam);
             j.moveOpprotunity();
-            if(t.getTime() == 6){
+            if (t.getTime() == 6) {
                 camera = false;
                 winScreen = true;
                 compareTime = System.currentTimeMillis() - 1000;
                 a.nightEnd();
                 o.reset();
-            }else if(o.getPower() <= 0){
+            } else if (o.getPower() <= 0) {
                 noPower = true;
                 office = true;
                 camera = false;
                 o.allOff();
             }
-        }else if (winScreen){
-            if(((System.currentTimeMillis() - compareTime)/1000) % winScreenTime == 0){
+        } else if (winScreen) {
+            if (((System.currentTimeMillis() - compareTime) / 1000) % winScreenTime == 0) {
                 System.out.println("hi");
                 winScreen = false;
                 onMenu = true;
                 menu.nextNight();
             }
-        }else if(isDead){
-            if(((System.currentTimeMillis() - compareTime)/1000) % 2 == 0){
+        } else if (isDead) {
+            if (((System.currentTimeMillis() - compareTime) / 1000) % 2 == 0) {
+                currentImage = null; //clears the current image so the jumpscare image does not flash again
                 loseScreen = true;
                 isDead = false;
             }
-        }else if(loseScreen){
-            if(((System.currentTimeMillis() - compareTime)/1000) % 10 == 0){
+        } else if (loseScreen) {
+            if (((System.currentTimeMillis() - compareTime) / 1000) % 10 == 0) {
                 loseScreen = false;
                 FahadInRoom = false;
                 JadenInRoom = false;
@@ -370,8 +394,23 @@ public class Main extends JComponent implements ActionListener {
             }
         }
         
-        if(office && FahadInRoom && Math.random() < f.getChance() / 2){
+        if(JadenInRoom){
+            o.setDoor1spec(false);
+            o.setLight1spec(false);
+        }else if(FahadInRoom){
+            o.setDoor2spec(false);
+            o.setLight2spec(false);
+        }
+
+        if (office && FahadInRoom && Math.random() < f.getChance() / 2 && ((System.currentTimeMillis() - compareTime) /1000) % 6 == 0) {
             currentImage = f.jumpScare();
+            a.nightEnd();
+            a.jumpScare();
+            office = false;
+            isDead = true;
+            compareTime = System.currentTimeMillis() - 1000;
+        } else if (JadenInRoom && Math.random() < j.getChance() / 2 && office  && ((System.currentTimeMillis() - compareTime) /1000) % 5 == 0 || camera && JadenInRoom && Math.random() < j.getChance() / 2  && ((System.currentTimeMillis() - compareTime) /1000) % 3 == 0) {
+            currentImage = j.jumpScare();
             a.nightEnd();
             a.jumpScare();
             office = false;
@@ -379,9 +418,18 @@ public class Main extends JComponent implements ActionListener {
             compareTime = System.currentTimeMillis() - 1000;
         }
 
-    }
+        if (noPower) {
 
+        }
+
+        if (noPower && !powerAudio) {
+            powerAudio = true;
+            a.noPower();
+        }
+
+    }
     // Used to implement any of the Mouse Actions
+
     private class Mouse extends MouseAdapter {
 
         // if a mouse button has been pressed down
@@ -392,6 +440,7 @@ public class Main extends JComponent implements ActionListener {
                 if (e.getX() >= newGameBut.x && e.getX() <= newGameBut.x + newGameBut.width && e.getY() >= newGameBut.y && e.getY() <= newGameBut.y + newGameBut.height) {
                     night = menu.load(0);
                     onMenu = false;
+                    powerAudio = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
                     o.reset();
@@ -402,6 +451,7 @@ public class Main extends JComponent implements ActionListener {
                     loadNight = true;
                 } else if (e.getX() >= continueBut.x && e.getX() <= continueBut.x + continueBut.width && e.getY() >= continueBut.y && e.getY() <= continueBut.y + continueBut.height) {
                     onMenu = false;
+                    powerAudio = false;
                     loadTime = System.currentTimeMillis();
                     t.nightStart();
                     o.reset();
@@ -418,17 +468,37 @@ public class Main extends JComponent implements ActionListener {
                     a.monitor();
                     o.setCam();
                     office = false;
-                }else if(lookingLeft){
-                    if(!noPower && e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height){
-                        o.setDoor1();
-                    }else if(!noPower && e.getX() > leftHallLight.x && e.getX() < leftHallLight.x + leftHallLight.width && e.getY() > leftHallLight.y && e.getY() < leftHallLight.y + leftHallLight.height){
-                        o.setLight1();
+                } else if (lookingLeft) {
+                    if (!noPower && e.getX() > leftDoorBut.x && e.getX() < leftDoorBut.x + leftDoorBut.width && e.getY() > leftDoorBut.y && e.getY() < leftDoorBut.y + leftDoorBut.height) {
+                        if(!JadenInRoom){
+                            o.setDoor1();
+                        }else{
+                            a.buttonNotWork();
+                        }
+                    } else if (!noPower && e.getX() > leftHallLight.x && e.getX() < leftHallLight.x + leftHallLight.width && e.getY() > leftHallLight.y && e.getY() < leftHallLight.y + leftHallLight.height) {
+                        if(!JadenInRoom){
+                            o.setLight1();
+                            if(j.getRoom() == 6 && !doorSeenJad){
+                                a.atDoor();
+                                doorSeenJad = true;
+                            }
+                        }else{
+                            a.buttonNotWork();
+                        }
                     }
-                }else if(!lookingLeft){
-                    if(!noPower && e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height){
-                        o.setDoor2();
-                    }else if(!noPower && e.getX() > rightHallLight.x && e.getX() < rightHallLight.x + rightHallLight.width && e.getY() > rightHallLight.y && e.getY() < rightHallLight.y + rightHallLight.height){
-                        o.setLight2();
+                } else if (!lookingLeft) {
+                    if (!noPower && e.getX() > rightDoorBut.x && e.getX() < rightDoorBut.x + rightDoorBut.width && e.getY() > rightDoorBut.y && e.getY() < rightDoorBut.y + rightDoorBut.height) {
+                        if(!FahadInRoom){
+                            o.setDoor2();
+                        }else{
+                            a.buttonNotWork();
+                        }
+                    } else if (!noPower && e.getX() > rightHallLight.x && e.getX() < rightHallLight.x + rightHallLight.width && e.getY() > rightHallLight.y && e.getY() < rightHallLight.y + rightHallLight.height) {
+                        if(!FahadInRoom){
+                            o.setLight2();
+                        }else{
+                            a.buttonNotWork();
+                        }
                     }
                 }
             } else if (camera) {

@@ -80,6 +80,38 @@ public class Office {
         }
         return cam;
     }
+    
+    public void setDoor1spec(boolean bool){
+        if(bool == true){
+            door1 = true;
+        }else{
+            door1 = false;
+        }
+    }
+    
+    public void setDoor2spec(boolean bool){
+        if(bool == true){
+            door2 = true;
+        }else{
+            door2 = false;
+        }
+    }
+    
+    public void setLight1spec(boolean bool){
+        if(bool == true){
+            light1 = true;
+        }else{
+            light1 = false;
+        }
+    }
+    
+    public void setLight2spec(boolean bool){
+        if(bool == true){
+            light2 = true;
+        }else{
+            light2 = false;
+        }
+    }
 
     public boolean getDoor1() {
         return door1;

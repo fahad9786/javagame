@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 public class Jaden extends Fahad {
 
     public BufferedImage jad1;
+    private BufferedImage jadJump;
     private int roomNum;
     private int difficulty;
     private double chance;
@@ -30,6 +31,7 @@ public class Jaden extends Fahad {
         roomNum = 0;
         try {
             jad1 = ImageIO.read(new File("images//jad1.jpg"));
+            jadJump = ImageIO.read(new File("images//jaden_2cr.jpg"));
         } catch (Exception e) {
 
         }
@@ -70,6 +72,11 @@ public class Jaden extends Fahad {
             if (roomNum < 6 && Math.random() < chance) {
                 roomNum++;
                 startTime = System.currentTimeMillis() - 1000;
+            }else if(roomNum == 6 && Math.random() < chance && o.getDoor1()){
+                roomNum = 1;
+            }else if(roomNum == 6 && Math.random() < chance && !o.getDoor1()){
+                roomNum = 7;
+                inRoom = true;
             }else{
                 startTime = System.currentTimeMillis() - 1000;
             }
@@ -81,5 +88,20 @@ public class Jaden extends Fahad {
     public int getRoom() {
         return roomNum;
     }
-
+    
+    @Override
+    public boolean inRoom(){
+        return inRoom;
+    }
+    
+    @Override
+    public double getChance(){
+        return chance;
+    }
+    
+    @Override
+    public BufferedImage jumpScare(){
+        return jadJump;
+    }
+    
 }
