@@ -9,39 +9,41 @@ import javax.imageio.ImageIO;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author pione
  */
-public class Jaden extends Fahad {
-
-    public BufferedImage jad1;
-    private BufferedImage jadJump;
-    public BufferedImage jadCorner;
-    public BufferedImage jadDoor;
-    public BufferedImage jadPaS;
+public class Andrew extends Fahad{
+    
+    public BufferedImage and2;
+    public BufferedImage and1;
+    public BufferedImage andDoor;
+    private BufferedImage andJump;
     private int roomNum;
     private int difficulty;
     private double chance;
-    private int moveTime = 75;
+    private int moveTime = 85;
     private boolean inRoom = false;
+    Fahad f;
 
     private long startTime;
 
-    public Jaden(Office o, Player p, MainMenu m) {
+    
+    public Andrew(Office o, Player p, MainMenu m, Fahad f) {
         super(o, p, m);
+        this.f = f;
         roomNum = 0;
         try {
-            jad1 = ImageIO.read(new File("images//jad1.jpg"));
-            jadJump = ImageIO.read(new File("images//jaden_2cr.jpg"));
-            jadCorner = ImageIO.read(new File("images//jad2_.png"));
-            jadDoor = ImageIO.read(new File("images//jad1.png"));
-            jadPaS = ImageIO.read(new File("images//jad3.png"));
+            and2 = ImageIO.read(new File("images//and2_1.jpg"));
+            and1 = ImageIO.read(new File("images//and1_.png"));
+            andJump = ImageIO.read(new File("images//and3_.jpg"));
+            andDoor = ImageIO.read(new File("images//and2.png"));
         } catch (Exception e) {
 
         }
     }
-
+    
     @Override
     public void startNight() {
         this.startTime = System.currentTimeMillis() + 5000;
@@ -58,11 +60,11 @@ public class Jaden extends Fahad {
             } else if (diff == 2) {
                 this.difficulty = 2;
             } else if (diff == 3) {
-                this.difficulty = 4;
+                this.difficulty = 3;
             } else if (diff == 4) {
-                this.difficulty = 8;
+                this.difficulty = 7;
             } else if (diff == 5) {
-                this.difficulty = 14;
+                this.difficulty = 13;
             }
             System.out.println(difficulty);
             chance = difficulty * 0.05;
@@ -73,14 +75,29 @@ public class Jaden extends Fahad {
     }
 
     public void moveOpprotunity() {
+        //makes sure andrew isn't in the same hall as Fahad
+        System.out.println(f.getRoom());
+        if(roomNum > 3 && roomNum == f.getRoom()){
+            roomNum = 1;
+            return;
+        }
         if ((System.currentTimeMillis() - startTime) / 100 > moveTime) {
-            if (roomNum < 6 && Math.random() < chance) {
+            if (roomNum < 3 && Math.random() < chance) {
+                roomNum++;
+                startTime = System.currentTimeMillis() - 1000;
+            }else if(roomNum + 1 != f.getRoom() && roomNum == 3 && Math.random() < chance){
+                roomNum++;
+                startTime = System.currentTimeMillis() - 1000;
+            }else if(roomNum + 1 != f.getRoom() && roomNum == 4 && Math.random() < chance){
+                roomNum++;
+                startTime = System.currentTimeMillis() - 1000;
+            }else if(roomNum + 1 != f.getRoom() && roomNum == 5 && Math.random() < chance){
                 roomNum++;
                 startTime = System.currentTimeMillis() - 1000;
             }else if(roomNum == 6 && Math.random() < chance && o.getDoor1()){
                 roomNum = 1;
                 startTime = System.currentTimeMillis() - 1000;
-            }else if(roomNum == 6 && Math.random() < chance && !o.getDoor1()){
+            }else if(roomNum + 1 != f.getRoom() && roomNum == 6 && Math.random() < chance && !o.getDoor1()){
                 roomNum = 7;
                 inRoom = true;
                 startTime = System.currentTimeMillis() - 1000;
@@ -108,7 +125,7 @@ public class Jaden extends Fahad {
     
     @Override
     public BufferedImage jumpScare(){
-        return jadJump;
+        return andJump;
     }
     
     @Override
