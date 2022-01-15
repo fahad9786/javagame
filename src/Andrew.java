@@ -76,7 +76,6 @@ public class Andrew extends Fahad{
 
     public void moveOpprotunity() {
         //makes sure andrew isn't in the same hall as Fahad
-        System.out.println(f.getRoom());
         if(roomNum > 3 && roomNum == f.getRoom()){
             roomNum = 1;
             return;
@@ -94,10 +93,10 @@ public class Andrew extends Fahad{
             }else if(roomNum + 1 != f.getRoom() && roomNum == 5 && Math.random() < chance){
                 roomNum++;
                 startTime = System.currentTimeMillis() - 1000;
-            }else if(roomNum == 6 && Math.random() < chance && o.getDoor1()){
+            }else if(roomNum == 6 && Math.random() < chance && o.getDoor2()){
                 roomNum = 1;
                 startTime = System.currentTimeMillis() - 1000;
-            }else if(roomNum + 1 != f.getRoom() && roomNum == 6 && Math.random() < chance && !o.getDoor1()){
+            }else if(roomNum + 1 != f.getRoom() && roomNum == 6 && Math.random() < chance && !o.getDoor2()){
                 roomNum = 7;
                 inRoom = true;
                 startTime = System.currentTimeMillis() - 1000;

@@ -210,7 +210,7 @@ public class Main extends JComponent implements ActionListener {
                     g.drawImage(p.leftHallLit, 100, 50, null);
                 }
                 if (j.getRoom() == 6 && o.getLight1()) {
-                    g.drawImage(j.jadDoor, 200, 100, null);
+                    g.drawImage(j.jadDoor, 300, 250, null);
                 }
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
@@ -220,7 +220,7 @@ public class Main extends JComponent implements ActionListener {
                     g.drawImage(p.rightHallLit, 980, 50, null);
                 }
                 if (and.getRoom() == 6 && o.getLight2()) {
-                    g.drawImage(and.andDoor, 800, 300, null);
+                    g.drawImage(and.andDoor, 750, 250, null);
                 }
             }
         } else if (camera) {
@@ -294,6 +294,10 @@ public class Main extends JComponent implements ActionListener {
             g.setColor(Color.white);
             g.setFont(noVid);
             g.drawString("[GAME_OVER]", 20, 100);
+        }
+        
+        if(playedMusic && lookingLeft){
+            g.drawImage(f.fadNoPow, 100, 100, this);
         }
 
         // GAME DRAWING ENDS HERE
@@ -374,6 +378,7 @@ public class Main extends JComponent implements ActionListener {
             } else if (!lookingLeft) {
                 currentImage = p.rightNoPower;
             }
+            
 
             if (t.getTime() == 6) {
                 office = false;
@@ -467,9 +472,11 @@ public class Main extends JComponent implements ActionListener {
             JadenInRoom = false;
             FahadInRoom = false;
             powerAudio = true;
+            o.allOff();
             a.noPower();
             footstepTimer = Math.round(Math.random() * 10 + 3);
-            musicTimer = footstepTimer + (Math.random() * (Math.random() * 15)) + 2;
+            musicTimer = footstepTimer + (Math.random() * (Math.random() * 10)) + 2;
+            System.out.println(musicTimer);
             jumpscareTimer = Math.round(Math.random() * 10) + 2;
             compareTime = System.currentTimeMillis() - 1000;
         }else if (noPower) {
@@ -484,6 +491,8 @@ public class Main extends JComponent implements ActionListener {
                 currentImage = f.jumpScare();
                 a.nightEnd();
                 a.jumpScare();
+                playedMusic = false;
+                playedFootsteps = false;
                 office = false;
                 isDead = true;
                 noPower = false;

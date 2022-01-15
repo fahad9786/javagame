@@ -30,6 +30,7 @@ public class Fahad {
     public BufferedImage fad2;
     public BufferedImage fad3;
     private BufferedImage fadJump;
+    public BufferedImage fadNoPow;
     
     public Fahad(Office o, Player p, MainMenu m){
         roomNum = 0;
@@ -41,6 +42,7 @@ public class Fahad {
             fad2 = ImageIO.read(new File("images//Fahad_3(1).png"));
             fad3 = ImageIO.read(new File("images//Fahad_1_30_2.jpg"));
             fadJump = ImageIO.read(new File("images//Fahad_2.jpg"));
+            fadNoPow = ImageIO.read(new File("images//FahadNoPow.jpg"));
         }catch(Exception e){
             e.printStackTrace();
         }
