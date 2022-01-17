@@ -384,6 +384,8 @@ public class Main extends JComponent implements ActionListener {
                 office = false;
                 winScreen = true;
                 noPower = false;
+                playedMusic = false;
+                playedFootsteps = false;
                 compareTime = System.currentTimeMillis() - 1000;
                 a.nightEnd();
                 o.reset();
