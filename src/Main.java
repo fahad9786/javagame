@@ -46,6 +46,7 @@ public class Main extends JComponent implements ActionListener {
     long loadTime; //time the pre night screen was started
     long compareTime; //this time will have its corresponding start time subtracted to calculate the time elapsed in seconds
     long faceTime; // amount of time a face is shown in the menu
+    long lirTime; //timer specifically for lirian incase compareTime is being used
 
     Font header = new Font("Arial", Font.BOLD, 100);
     Font buttons = new Font("Arial", Font.PLAIN, 50);
@@ -88,6 +89,7 @@ public class Main extends JComponent implements ActionListener {
     boolean powerAudio = false; //keeps track of if the out of power audio has already played. prevents audio repeating forever
     boolean doorSeenJad = false; //switches if jaden has been seen outside the door
     boolean doorSeenAnd = false;
+    boolean LirAtDesk = false;
 
     //main menu buttons
     Rectangle newGameBut = new Rectangle(100, 460, 250, 50);
@@ -119,8 +121,9 @@ public class Main extends JComponent implements ActionListener {
     Fahad f = new Fahad(o, p, menu);
     Jaden j = new Jaden(o, p, menu);
     Andrew and = new Andrew(o, p, menu, f);
+    Lirian l = new Lirian(o, p, menu);
     TimeController t = new TimeController();
-    AudioController a = new AudioController();
+    AudioController a = new AudioController(menu);
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -212,6 +215,9 @@ public class Main extends JComponent implements ActionListener {
                 if (j.getRoom() == 6 && o.getLight1()) {
                     g.drawImage(j.jadDoor, 300, 250, null);
                 }
+                if (LirAtDesk){
+                    g.drawImage(l.LirAtDesk, 720, 500, null);
+                }
             } else if (!lookingLeft) {
                 g.drawImage(p.butRight, 1191, 400, null);
                 if (o.getDoor2()) {
@@ -221,6 +227,9 @@ public class Main extends JComponent implements ActionListener {
                 }
                 if (and.getRoom() == 6 && o.getLight2()) {
                     g.drawImage(and.andDoor, 750, 250, null);
+                }
+                if (LirAtDesk){
+                    g.drawImage(l.LirAtDesk, 400, 500, null);
                 }
             }
         } else if (camera) {
@@ -341,6 +350,7 @@ public class Main extends JComponent implements ActionListener {
                 curCam = p.Cam1A;
                 currentImage = p.left;
                 office = true;
+                a.playCall();
                 a.nightStart();
             }
         } else if (office && !noPower) {
@@ -371,6 +381,19 @@ public class Main extends JComponent implements ActionListener {
             }
             if(doorSeenAnd && and.getRoom() != 6){
                 doorSeenAnd = false;
+            }
+            if(LirAtDesk){
+                if((System.currentTimeMillis() - lirTime)/1000 == 3){
+                    currentImage = l.jumpScare();
+                    a.nightEnd();
+                    a.LirJump();
+                    playedMusic = false;
+                    playedFootsteps = false;
+                    office = false;
+                    isDead = true;
+                    noPower = false;
+                    compareTime = System.currentTimeMillis() - 1000;
+                }
             }
         } else if (office && noPower) {
             if (lookingLeft) {
@@ -430,6 +453,7 @@ public class Main extends JComponent implements ActionListener {
                 loseScreen = false;
                 FahadInRoom = false;
                 JadenInRoom = false;
+                LirAtDesk = false;
                 onMenu = true;
             }
         }
@@ -549,6 +573,9 @@ public class Main extends JComponent implements ActionListener {
                 if (!noPower && e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = true;
                     a.monitor();
+                    if(LirAtDesk){
+                        LirAtDesk = false;
+                    }
                     o.setCam();
                     office = false;
                 } else if (lookingLeft) {
@@ -594,6 +621,10 @@ public class Main extends JComponent implements ActionListener {
                 if (e.getX() > 300 && e.getX() < 900 && e.getY() > 600) {
                     camera = false;
                     a.monitor();
+                    if(!LirAtDesk && Math.random() < 0.01){
+                        LirAtDesk = true;
+                        lirTime = System.currentTimeMillis();
+                    }
                     o.setCam();
                     office = true;
                     //Ubsurd amount of else if statements for each of the cameras

@@ -29,8 +29,16 @@ public class AudioController {
     private final MediaPlayer door;
     private final MediaPlayer music;
     private final MediaPlayer nightStart;
+    private final MediaPlayer LirJump;
+    private final MediaPlayer N1;
+    private final MediaPlayer N2;
+    private final MediaPlayer N3;
+    private final MediaPlayer N4;
+    private final MediaPlayer N5;
+    MainMenu m;
     
-    public AudioController(){
+    public AudioController(MainMenu m){
+        this.m = m;
         Media fanMed = new Media(new File("Audio//officeAmbiance.mp3").toURI().toString());
         Media screamMed = new Media(new File("Audio//Scream.mp3").toURI().toString());
         Media menuMed = new Media(new File("Audio//menu.mp3").toURI().toString());
@@ -44,6 +52,12 @@ public class AudioController {
         Media doorMed = new Media(new File("Audio//door.mp3").toURI().toString());
         Media musicMed = new Media(new File("Audio//music.mp3").toURI().toString());
         Media nightStartMed = new Media(new File("Audio//nightStart.mp3").toURI().toString());
+        Media LirJumpMed = new Media(new File("Audio//gFredJump.mp3").toURI().toString());
+        Media N1Med = new Media(new File("Audio//Phone guy Night 1.mp3").toURI().toString());
+        Media N2Med = new Media(new File("Audio//Phone guy Night 2.mp3").toURI().toString());
+        Media N3Med = new Media(new File("Audio//Phone guy Night 3.mp3").toURI().toString());
+        Media N4Med = new Media(new File("Audio//Phone guy Night 4.mp3").toURI().toString());
+        Media N5Med = new Media(new File("Audio//Phone guy Night 5.mp3").toURI().toString());
         
         fan = new MediaPlayer(fanMed);
         scream = new MediaPlayer(screamMed);
@@ -58,6 +72,12 @@ public class AudioController {
         door = new MediaPlayer(doorMed);
         music = new MediaPlayer(musicMed);
         nightStart = new MediaPlayer(nightStartMed);
+        LirJump = new MediaPlayer(LirJumpMed);
+        N1 = new MediaPlayer(N1Med);
+        N2 = new MediaPlayer(N2Med);
+        N3 = new MediaPlayer(N3Med);
+        N4 = new MediaPlayer(N4Med);
+        N5 = new MediaPlayer(N5Med);
     }
     
     public void menu(){
@@ -80,8 +100,23 @@ public class AudioController {
     }
     
     public void lose(){
+        LirJump.stop();
         lose.seek(Duration.ZERO);
         lose.play();
+    }
+    
+    public void playCall(){
+        if(m.load(1) == 1){
+            N1.play();
+        }else if(m.load(1) == 2){
+            N2.play();
+        }else if(m.load(1) == 3){
+            N3.play();
+        }else if(m.load(1) == 4){
+            N4.play();
+        }else if(m.load(1) == 5){
+            N5.play();
+        }
     }
     
     public void monitor(){
@@ -100,6 +135,11 @@ public class AudioController {
     public void jumpScare(){
         scream.seek(Duration.ZERO);
         scream.play();
+    }
+    
+    public void LirJump(){
+        LirJump.seek(Duration.ZERO);
+        LirJump.play();
     }
     
     public void noPower(){
