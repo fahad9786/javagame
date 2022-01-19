@@ -79,7 +79,8 @@ public class AudioController {
         N4 = new MediaPlayer(N4Med);
         N5 = new MediaPlayer(N5Med);
         
-        fan.setVolume(0.8);
+        fan.setVolume(0.6);
+        nightStart.setVolume(0.6);
     }
     
     public void menu(){
