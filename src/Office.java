@@ -175,7 +175,7 @@ public class Office {
                 }
 
                 if (cam == true) {
-                    power = power - 1;
+                    power = power - 0.3;
                 }
                 last = System.currentTimeMillis();
             }

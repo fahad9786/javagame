@@ -78,6 +78,8 @@ public class AudioController {
         N3 = new MediaPlayer(N3Med);
         N4 = new MediaPlayer(N4Med);
         N5 = new MediaPlayer(N5Med);
+        
+        fan.setVolume(0.8);
     }
     
     public void menu(){
@@ -106,17 +108,56 @@ public class AudioController {
     }
     
     public void playCall(){
-        if(m.load(1) == 1){
-            N1.play();
-        }else if(m.load(1) == 2){
-            N2.play();
-        }else if(m.load(1) == 3){
-            N3.play();
-        }else if(m.load(1) == 4){
-            N4.play();
-        }else if(m.load(1) == 5){
-            N5.play();
+        switch (m.load(1)) {
+            case 1:
+                N1.seek(Duration.ZERO);
+                N1.play();
+                break;
+            case 2:
+                N2.seek(Duration.ZERO);
+                N2.play();
+                break;
+            case 3:
+                N3.seek(Duration.ZERO);
+                N3.play();
+                break;
+            case 4:
+                N4.seek(Duration.ZERO);
+                N4.play();
+                break;
+            case 5:
+                N5.seek(Duration.ZERO);
+                N5.play();
+                break;
+            default:
+                break;
         }
+    }
+    
+    public int getCallLength(){
+        switch (m.load(1)) {
+            case 1:
+                return N1.getStopTime().compareTo(N1.getCurrentTime());
+            case 2:
+                return N2.getStopTime().compareTo(N2.getCurrentTime());
+            case 3:
+                return N3.getStopTime().compareTo(N3.getCurrentTime());
+            case 4:
+                return N4.getStopTime().compareTo(N4.getCurrentTime());
+            case 5:
+                return N5.getStopTime().compareTo(N5.getCurrentTime());
+            default:
+                break;
+        }
+        return 0;
+    }
+    
+    public void stopCall(){
+        N1.stop();
+        N2.stop();
+        N3.stop();
+        N4.stop();
+        N5.stop();
     }
     
     public void monitor(){
