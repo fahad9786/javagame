@@ -44,7 +44,7 @@ public class Player {
             Cam1A = ImageIO.read(new File("images//Cam1A.jpg"));
             Cam1B = ImageIO.read(new File("images//Cam1B.jpg"));
             Cam1C = ImageIO.read(new File("images//Cam1C.jpg"));
-            Cam2A = ImageIO.read(new File("images//Cam2A.PNG"));
+            Cam2A = ImageIO.read(new File("images//Cam2A.jpg"));
             Cam2B = ImageIO.read(new File("images//Cam2B.jpg"));
             Cam3 = ImageIO.read(new File("images//Cam3.jpg"));
             Cam4A = ImageIO.read(new File("images//Cam4A.jpg"));
