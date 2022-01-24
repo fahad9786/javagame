@@ -541,6 +541,8 @@ public class Main extends JComponent implements ActionListener {
             System.out.println(musicTimer);
             jumpscareTimer = Math.round(Math.random() * 10) + 2;
             compareTime = System.currentTimeMillis() - 1000;
+            
+        //goes through all the sounds that need to be played when out of power leading up to the jumpscare
         }else if (noPower) {
             if(!playedFootsteps && ((System.currentTimeMillis() - compareTime)/1000) > footstepTimer){
                 a.footsteps();
