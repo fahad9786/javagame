@@ -316,6 +316,7 @@ public class Main extends JComponent implements ActionListener {
             g.drawString("[GAME_OVER]", 20, 100);
         }
         
+        //shows fahads face in the left door when power is out
         if(playedMusic && lookingLeft){
             g.drawImage(f.fadNoPow, 100, 100, this);
         }
@@ -424,6 +425,7 @@ public class Main extends JComponent implements ActionListener {
             }
             
 
+            //wins the night at 6AM
             if (t.getTime() == 6) {
                 office = false;
                 winScreen = true;
@@ -442,6 +444,7 @@ public class Main extends JComponent implements ActionListener {
             f.moveOpprotunity(curCam);
             j.moveOpprotunity();
             and.moveOpprotunity();
+            //wins the night at 6AM
             if (t.getTime() == 6) {
                 camera = false;
                 winScreen = true;
@@ -524,7 +527,7 @@ public class Main extends JComponent implements ActionListener {
             isDead = true;
             compareTime = System.currentTimeMillis() - 1000;
         }
-        //when the power goes out
+        //when the power first goes out
         if (noPower && !powerAudio) {
             JadenInRoom = false;
             FahadInRoom = false;
