@@ -497,6 +497,7 @@ public class Main extends JComponent implements ActionListener {
             o.setLight2spec(false);
         }
 
+        //when any of the characters are in the room
         if (office && FahadInRoom && Math.random() < f.getChance() / 2 && ((System.currentTimeMillis() - compareTime) /1000) % 6 == 0) {
             currentImage = f.jumpScare();
             a.nightEnd();
