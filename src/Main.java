@@ -16,6 +16,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -325,7 +327,16 @@ public class Main extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void setup() {
         // Any of your pre setup before the loop starts should go here
-        System.out.println(startTime);
+        try{
+            Scanner nightNum = new Scanner(new File("Config.txt"));
+            if(nightNum.nextInt() > 5){
+                PrintWriter output = new PrintWriter(new File("Config.txt"));
+                output.println(1);
+                output.close();
+            }
+        }catch(Exception e){
+        }
+        
     }
 
     // The main game loop
