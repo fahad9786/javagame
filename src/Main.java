@@ -316,6 +316,7 @@ public class Main extends JComponent implements ActionListener {
             g.drawString("[GAME_OVER]", 20, 100);
         }
         
+        //shows fahads face in the left door when power is out
         if(playedMusic && lookingLeft){
             g.drawImage(f.fadNoPow, 100, 100, this);
         }
@@ -424,6 +425,7 @@ public class Main extends JComponent implements ActionListener {
             }
             
 
+            //wins the night at 6AM
             if (t.getTime() == 6) {
                 office = false;
                 winScreen = true;
@@ -442,6 +444,7 @@ public class Main extends JComponent implements ActionListener {
             f.moveOpprotunity(curCam);
             j.moveOpprotunity();
             and.moveOpprotunity();
+            //wins the night at 6AM
             if (t.getTime() == 6) {
                 camera = false;
                 winScreen = true;
@@ -494,6 +497,7 @@ public class Main extends JComponent implements ActionListener {
             o.setLight2spec(false);
         }
 
+        //when any of the characters are in the room
         if (office && FahadInRoom && Math.random() < f.getChance() / 2 && ((System.currentTimeMillis() - compareTime) /1000) % 6 == 0) {
             currentImage = f.jumpScare();
             a.nightEnd();
@@ -524,7 +528,7 @@ public class Main extends JComponent implements ActionListener {
             isDead = true;
             compareTime = System.currentTimeMillis() - 1000;
         }
-        //when the power goes out
+        //when the power first goes out
         if (noPower && !powerAudio) {
             JadenInRoom = false;
             FahadInRoom = false;
@@ -538,6 +542,8 @@ public class Main extends JComponent implements ActionListener {
             System.out.println(musicTimer);
             jumpscareTimer = Math.round(Math.random() * 10) + 2;
             compareTime = System.currentTimeMillis() - 1000;
+            
+        //goes through all the sounds that need to be played when out of power leading up to the jumpscare
         }else if (noPower) {
             if(!playedFootsteps && ((System.currentTimeMillis() - compareTime)/1000) > footstepTimer){
                 a.footsteps();

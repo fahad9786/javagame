@@ -155,7 +155,7 @@ public class Office {
         if (power > 0) {
             if ((time - last) / 100 > 20) {
                 // subtract from the power when nothings being used every ...time
-                power = power - 0.3;
+                power = power - 0.5;
 
                 // subtract power when different electronics used
                 if (door1 == true) {
