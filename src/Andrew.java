@@ -23,7 +23,7 @@ public class Andrew extends Fahad{
     private int roomNum;
     private int difficulty;
     private double chance;
-    private int moveTime = 85;
+    private int moveTime = 75;
     private boolean inRoom = false;
     Fahad f;
 

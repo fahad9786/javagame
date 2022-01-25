@@ -23,7 +23,7 @@ public class Jaden extends Fahad {
     private int roomNum;
     private int difficulty;
     private double chance;
-    private int moveTime = 75;
+    private int moveTime = 50;
     private boolean inRoom = false;
 
     private long startTime;
