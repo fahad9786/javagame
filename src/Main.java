@@ -214,6 +214,28 @@ public class Main extends JComponent implements ActionListener {
             if(!callMute && a.getCallLength() != 0){
                 g.drawString("mute call", 525, 40);
             }
+            g.drawRect(3, 53, 73, 33);
+            g.fillRoundRect(76, 63, 10, 10, 2, 2);
+            switch(o.totalOn()){
+                case 5:
+                    g.setColor(Color.red);
+                    g.fillRect(65, 55, 10, 30);
+                case 4:
+                    g.setColor(Color.orange);
+                    g.fillRect(50, 55, 10, 30);
+                case 3:
+                    g.setColor(Color.yellow);
+                    g.fillRect(35, 55, 10, 30);
+                case 2:
+                    g.setColor(Color.green);
+                    g.fillRect(20, 55, 10, 30);
+                case 1:
+                    g.setColor(Color.green);
+                    g.fillRect(5, 55, 10, 30);
+                    break;
+                default:
+                    break;
+            }
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
             if (lookingLeft) {
@@ -286,8 +308,31 @@ public class Main extends JComponent implements ActionListener {
             } else if (curCam == p.Cam2B && j.getRoom() == 5) {
                 g.drawImage(j.jadCorner, 0, 0, null);
             }
-
+            
             g.setColor(Color.white);
+            g.drawRect(3, 53, 73, 33);
+            g.fillRoundRect(76, 63, 10, 10, 2, 2);
+            switch(o.totalOn()){
+                case 5:
+                    g.setColor(Color.red);
+                    g.fillRect(65, 55, 10, 30);
+                case 4:
+                    g.setColor(Color.orange);
+                    g.fillRect(50, 55, 10, 30);
+                case 3:
+                    g.setColor(Color.yellow);
+                    g.fillRect(35, 55, 10, 30);
+                case 2:
+                    g.setColor(Color.green);
+                    g.fillRect(20, 55, 10, 30);
+                case 1:
+                    g.setColor(Color.green);
+                    g.fillRect(5, 55, 10, 30);
+                    break;
+                default:
+                    break;
+            }
+
             g.setFont(buttons);
             g.setColor(Color.gray);
             g.drawRect(300, 600, 600, 100);
@@ -467,10 +512,11 @@ public class Main extends JComponent implements ActionListener {
             }
         } else if (isDead) {
             if (((System.currentTimeMillis() - compareTime) / 1000) % 2 == 0) {
-                currentImage = null; //clears the current image so the jumpscare image does not flash again
+                currentImage = menu.getImage(0); //clears the current image so the jumpscare image does not flash again
                 loseScreen = true;
                 isDead = false;
                 a.lose();
+                a.stopCall();
             }
         } else if (loseScreen) {
             if (((System.currentTimeMillis() - compareTime) / 1000) % 10 == 0) {
@@ -548,7 +594,7 @@ public class Main extends JComponent implements ActionListener {
             if(!playedFootsteps && ((System.currentTimeMillis() - compareTime)/1000) > footstepTimer){
                 a.footsteps();
                 playedFootsteps = true;
-            }else if(!playedMusic && Math.round(((System.currentTimeMillis() - compareTime)/1000) % musicTimer) == 0){
+            }else if(!playedMusic && Math.round(((System.currentTimeMillis() - compareTime)/1000)) > musicTimer){
                 a.music();
                 playedMusic = true;
                 compareTime = System.currentTimeMillis() - 1000;

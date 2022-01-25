@@ -128,6 +128,7 @@ public class AudioController {
                 break;
             case 5:
                 N5.seek(Duration.ZERO);
+                //N5.setStartTime(Duration.ZERO);
                 N5.play();
                 break;
             default:
@@ -136,6 +137,7 @@ public class AudioController {
     }
     
     public int getCallLength(){
+        System.out.println(N5.getCurrentTime() + "  " + N5.getStopTime());
         switch (m.load(1)) {
             case 1:
                 return N1.getStopTime().compareTo(N1.getCurrentTime());

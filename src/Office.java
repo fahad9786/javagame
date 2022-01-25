@@ -20,6 +20,7 @@ public class Office {
     private boolean light2 = false;
     private boolean cam = false;
     private long last = System.currentTimeMillis();
+    private int totalOn;
 
     public Office() {
 
@@ -140,6 +141,27 @@ public class Office {
     // getter method
     public double getPower() {
         return power;
+    }
+    
+    //returns an int representing the total number of electronics being used
+    public int totalOn(){
+        totalOn = 0;
+        if(door1){
+            totalOn++;
+        }
+        if(door2){
+            totalOn++;
+        }
+        if(light1){
+            totalOn++;
+        }
+        if(light2){
+            totalOn++;
+        }
+        if(cam){
+            totalOn++;
+        }
+        return totalOn;
     }
 
     //sets all elecronics off when power is out
